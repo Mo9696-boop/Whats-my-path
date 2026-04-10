@@ -451,7 +451,7 @@ function optList(items,key,sel){
   return`<div class="opt-list">${items.map((it,i)=>`<div class="opt${isSel(it.id)?' sel':''}" data-${key}="${it.id}"><div class="opt-key">${KEYS[i]}</div><div class="opt-body"><div class="opt-title">${it.l}</div><div class="opt-desc">${it.d}</div></div><div class="opt-arr">${isSel(it.id)?'✓':'›'}</div></div>`).join('')}</div>`;}
 
 function heroHTML(){return`<div class="hero-wrap"><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
-  <div class="eyebrow"><div class="edot"></div>Deep career assessment · Built for researchers</div>
+  <div class="eyebrow"><div class="edot"></div>What's my path? · Career assessment for researchers</div>
   <div class="hero-h1">You trained for one career.<br>You qualify for <span class="hl">dozens.</span></div>
   <p class="hero-sub">Most researchers only ever hear about <strong>3 options</strong>. I mapped <strong>80+</strong>. Answer 6 honest questions and leave with a full analysis of where you actually fit — including academic paths, postdocs, and PhDs.</p>
   <div class="mq-wrap">${mq(R1,false)}${mq(R2,true)}</div>
