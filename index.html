@@ -199,10 +199,18 @@ h2.st{font-size:32px;font-weight:700;color:var(--color-text-primary);margin-bott
 .fdot{width:5px;height:5px;border-radius:50%;background:#1D9E75}
 </style>
 <div class="rp"><div id="progbar"></div><div id="app"></div>
-<div class="footer-attr"><div class="fdot"></div>
-<span style="font-size:12px;color:var(--color-text-secondary)">A tool by</span>
-<span style="font-size:12px;font-weight:700;color:var(--color-text-primary)">Mohamad AL HAJJ</span>
-<span style="font-size:11px;padding:1px 8px;border-radius:20px;background:#E1F5EE;color:#0F6E56;border:1px solid #9FE1CB;font-weight:700">PhD</span></div></div>
+<div class="footer-attr">
+  <div class="fdot" onclick="fdotClick()" style="cursor:pointer" title="Click 5 times"></div>
+  <span style="font-size:12px;color:var(--color-text-secondary)">A tool by</span>
+  <span style="font-size:12px;font-weight:700;color:var(--color-text-primary)">Mohamad AL HAJJ</span>
+  <span style="font-size:11px;padding:1px 8px;border-radius:20px;background:#E1F5EE;color:#0F6E56;border:1px solid #9FE1CB;font-weight:700">PhD</span>
+  <span style="color:var(--color-border-tertiary)">·</span>
+  <span onclick="openLink('https://www.linkedin.com/newsletters/phd-to-industry-how-to-win?-7349495949863346176/')" style="font-size:12px;color:#1D9E75;font-weight:600;cursor:pointer">Academia to Industry</span>
+  <span style="color:var(--color-border-tertiary)">·</span>
+  <span onclick="openLink('https://www.linkedin.com/newsletters/la-valorisation-7425136874228314112/')" style="font-size:12px;color:#1D9E75;font-weight:600;cursor:pointer">La Valorisation</span>
+  <span style="color:var(--color-border-tertiary)">·</span>
+  <span onclick="openLink('https://www.linkedin.com/in/mohamad-alhajj/')" style="font-size:12px;color:#1D9E75;font-weight:600;cursor:pointer">CVLab</span>
+</div></div>
 <script>
 const R1=['Data Scientist','Medical Science Liaison','Principal Investigator','Science Policy Advisor','Grant Writer','Venture Associate','Clinical Specialist','Postdoctoral Researcher','Lab Automation Engineer','Biostatistician','Science Communicator','Clinical Trial Scientist'];
 const R2=['Regulatory Affairs Specialist','Product Manager','Research Director','Chief Scientific Officer','Competitive Intelligence Analyst','Field Application Scientist','Management Consultant','Study Director','Computational Biologist','Portfolio Manager','UX Researcher','Investment Analyst'];
@@ -540,6 +548,70 @@ function workRiskHTML(){
   <div class="btnrow" style="margin-top:1.5rem"><button class="btn" id="bck">${svgB} Back</button><button class="btn btn-p" id="nxt" ${!ok?'disabled':''}>Build my career map ${svgA}</button></div>
 </div>`;}
 
+// ── DATA COLLECTION ──────────────────────────────────────
+let wmpNum=null,wmpFdotClicks=0;
+
+async function saveStats(){
+  try{
+    const type=getProfileType();
+    const getN=async k=>{try{const r=await window.storage.get(k,true);return parseInt(r?.value||'0')||0;}catch{return 0;}};
+    const getJ=async k=>{try{const r=await window.storage.get(k,true);return JSON.parse(r?.value||'{}');}catch{return{};}};
+    const total=(await getN('wmp:total'))+1;
+    await window.storage.set('wmp:total',String(total),true);
+    wmpNum=total;
+    const profiles=await getJ('wmp:profiles');profiles[type.id]=(profiles[type.id]||0)+1;
+    await window.storage.set('wmp:profiles',JSON.stringify(profiles),true);
+    const fields=await getJ('wmp:fields');if(state.field){fields[state.field]=(fields[state.field]||0)+1;await window.storage.set('wmp:fields',JSON.stringify(fields),true);}
+    const edu=await getJ('wmp:edu');edu[state.edu]=(edu[state.edu]||0)+1;await window.storage.set('wmp:edu',JSON.stringify(edu),true);
+    const goals=await getJ('wmp:goals');[...state.goals].forEach(g=>{goals[g]=(goals[g]||0)+1;});await window.storage.set('wmp:goals',JSON.stringify(goals),true);
+    const sat=await getJ('wmp:sat');sat[state.satisfaction]=(sat[state.satisfaction]||0)+1;await window.storage.set('wmp:sat',JSON.stringify(sat),true);
+    const cats=await getJ('wmp:cats');[...state.cats].forEach(c=>{cats[c]=(cats[c]||0)+1;});await window.storage.set('wmp:cats',JSON.stringify(cats),true);
+  }catch(e){console.error('Stats save error:',e);}
+}
+
+async function loadAllStats(){
+  const getN=async k=>{try{const r=await window.storage.get(k,true);return parseInt(r?.value||'0')||0;}catch{return 0;}};
+  const getJ=async k=>{try{const r=await window.storage.get(k,true);return JSON.parse(r?.value||'{}');}catch{return{};}};
+  const[total,profiles,fields,edu,goals,sat,cats]=await Promise.all(['wmp:total','wmp:profiles','wmp:fields','wmp:edu','wmp:goals','wmp:sat','wmp:cats'].map((k,i)=>i===0?getN(k):getJ(k)));
+  return{total,profiles,fields,edu,goals,sat,cats};
+}
+
+function sortedEntries(obj){return Object.entries(obj).sort((a,b)=>b[1]-a[1]);}
+function bar(n,max){return`<div style="height:5px;border-radius:3px;background:var(--color-border-tertiary);margin-top:4px"><div style="height:100%;width:${max?Math.round((n/max)*100):0}%;background:#1D9E75;border-radius:3px;transition:width .5s ease"></div></div>`;}
+
+async function showDashboard(){
+  const s=await loadAllStats();
+  const pnames={deep_scientist:'The Deep Scientist',data_thinker:'The Data Thinker',storyteller:'The Science Storyteller',strategic_mind:'The Strategic Mind',bridge_builder:'The Bridge Builder',knowledge_architect:'The Knowledge Architect',entrepreneur:'The Science Entrepreneur',research_orchestrator:'The Research Orchestrator'};
+  const section=(title,entries,labelFn)=>`
+    <div style="padding:20px;background:var(--color-background-secondary);border-radius:14px;border:1px solid var(--color-border-tertiary)">
+      <div class="analysis-ey">${title}</div>
+      ${entries.length?entries.map(([k,v])=>`<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--color-text-primary);font-weight:600">${labelFn(k)}</span><span style="color:var(--color-text-secondary);font-weight:600">${v} (${s.total?Math.round(v/s.total*100):0}%)</span></div>${bar(v,entries[0]?.[1])}</div>`).join(''):'<p style="font-size:13px;color:var(--color-text-secondary)">No data yet</p>'}
+    </div>`;
+  document.getElementById('progbar').innerHTML='';
+  document.getElementById('app').innerHTML=`<div class="step">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2rem;gap:12px">
+      <div>
+        <div class="step-ey">Private data dashboard</div>
+        <h2 class="st" style="font-size:28px">${s.total} researchers have completed this assessment</h2>
+      </div>
+      <button class="btn" onclick="state.step=7;render()" style="flex-shrink:0">Back</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:2rem">
+      ${section('Profile types',sortedEntries(s.profiles),k=>pnames[k]||k)}
+      ${section('Research fields',sortedEntries(s.fields),k=>FIELDS.find(f=>f.id===k)?.l||k)}
+      ${section('Education levels',sortedEntries(s.edu),k=>EDU.find(e=>e.id===k)?.l||k)}
+      ${section('Career directions',sortedEntries(s.goals),k=>GOALS.find(g=>g.id===k)?.l||k)}
+      ${section('Skill areas',sortedEntries(s.cats),k=>CATS.find(c=>c.id===k)?.t||k)}
+      ${section('Current state of mind',sortedEntries(s.sat),k=>SATISFACTION.find(x=>x.id===k)?.l||k)}
+    </div>
+    <p style="font-size:11px;color:var(--color-text-secondary);text-align:center;font-style:italic">All data is anonymous. Access this dashboard by clicking the green dot in the footer 5 times.</p>
+  </div>`;}
+
+function fdotClick(){
+  wmpFdotClicks++;
+  if(wmpFdotClicks>=5){wmpFdotClicks=0;showDashboard();}
+}
+
 const MSGS=['Analyzing your 7 responses...','Building your researcher profile...','Matching career paths...','Adding field-specific context...','Writing your personal analysis...','Almost ready...'];
 
 function loadingHTML(){return`<div class="loading-screen">
@@ -553,7 +625,12 @@ function startLoading(){
   let i=0,pct=0;
   const mi=setInterval(()=>{i=Math.min(i+1,MSGS.length-1);const el=document.getElementById('load-msg');if(el)el.textContent=MSGS[i];},380);
   const bi=setInterval(()=>{pct=Math.min(pct+4,94);const el=document.getElementById('load-bar');if(el)el.style.width=pct+'%';},80);
-  setTimeout(()=>{clearInterval(mi);clearInterval(bi);const el=document.getElementById('load-bar');if(el)el.style.width='100%';setTimeout(()=>{state.loading=false;render();},200);},2400);
+  setTimeout(async()=>{
+    clearInterval(mi);clearInterval(bi);
+    const el=document.getElementById('load-bar');if(el)el.style.width='100%';
+    await saveStats();
+    setTimeout(()=>{state.loading=false;render();},200);
+  },2400);
 }
 
 function animateNum(id,target){const el=document.getElementById(id);if(!el)return;let n=0;const s=Math.max(1,Math.ceil(target/28));const t=setInterval(()=>{n=Math.min(n+s,target);el.textContent=n;if(n>=target)clearInterval(t);},28);}
@@ -602,13 +679,9 @@ function resultsHTML(){
       <button class="btn" onclick="state.shareOpen=false;render()">Close</button>
     </div>
   </div>`:`
-  <div style="margin-bottom:1.5rem">
-    <button class="btn" onclick="state.shareOpen=true;render()" style="font-size:13px;padding:9px 18px">
-      <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-      Share my profile
-    </button>
-  </div>`}
+`}
 
+  ${wmpNum?`<div style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--color-background-secondary);border-radius:12px;border:1px solid var(--color-border-tertiary);margin-bottom:1.5rem"><div style="width:8px;height:8px;border-radius:50%;background:#1D9E75;flex-shrink:0"></div><span style="font-size:13px;color:var(--color-text-secondary)">You are researcher <strong style="color:var(--color-text-primary)">#${wmpNum}</strong> to complete this assessment</span></div>`:''}
   <div class="analysis-block">
     <div class="analysis-ey">Where you are coming from</div>
     <p class="analysis-para">${opening}</p>
@@ -673,43 +746,6 @@ function resultsHTML(){
     <div class="steps-list">${steps.map((s,i)=>`<div class="step-item"><div class="step-num">${i+1}</div><div class="step-text">${s}</div></div>`).join('')}</div>
   </div>
 
-  <div class="email-section" id="email-section">
-    <h3>Want more of this?</h3>
-    <p>Join the newsletter and get weekly insights on researcher careers, career transitions, and what actually works - straight from someone who has been through it. No spam. Unsubscribe anytime.</p>
-    <form id="email-form">
-      <div class="email-row">
-        <input type="email" id="email-input" placeholder="your@email.com" required>
-        <button type="submit" class="btn btn-p">Join the newsletter ${svgA}</button>
-      </div>
-    </form>
-    <p class="email-small">By subscribing, you agree to occasionally hear from Mohamad AL HAJJ about researcher career resources.</p>
-  </div>
-
-  <div class="next-section">
-    <div class="analysis-ey">If this resonated - here is where I go deeper</div>
-    <p style="font-size:14px;color:var(--color-text-secondary);line-height:1.65;margin-bottom:1rem">These are the resources I have built for exactly the situation you are navigating. Each one goes further than 7 minutes can.</p>
-    <div class="next-grid">
-      <a href="https://www.linkedin.com/newsletters/phd-to-industry-how-to-win%3F-7349495949863346176/" target="_blank" class="next-card">
-        <div class="next-card-tag">Newsletter · English</div>
-        <div class="next-card-title">Academia to Industry</div>
-        <div class="next-card-desc">Real, honest coverage of researcher career transitions. No sanitized advice - just what actually works. 1,400+ subscribers and growing.</div>
-        <div class="next-card-cta">Read it →</div>
-      </a>
-      <a href="https://www.linkedin.com/newsletters/la-valorisation-7425136874228314112/" target="_blank" class="next-card">
-        <div class="next-card-tag">Newsletter · French ecosystem</div>
-        <div class="next-card-title">La Valorisation</div>
-        <div class="next-card-desc">A weekly newsletter decoding how French research creates value - technology transfer, deeptech startups, IP, and the people navigating it all.</div>
-        <div class="next-card-cta">Read it →</div>
-      </a>
-      <a href="https://www.linkedin.com/in/mohamad-alhajj/" target="_blank" class="next-card">
-        <div class="next-card-tag">Mentoring program</div>
-        <div class="next-card-title">CVLab</div>
-        <div class="next-card-desc">100+ researchers helped to build the bridge to their next chapter. Personalized, hands-on career support for researchers who are serious about moving forward.</div>
-        <div class="next-card-cta">Connect →</div>
-      </a>
-    </div>
-  </div>
-
   <div class="divider"></div>
   <div class="restart-row"><button class="btn" onclick="restart()">Start over</button></div>
 </div>`;}
@@ -733,18 +769,6 @@ function render(){
   a.innerHTML=a.innerHTML.replace(/—/g,' - ');
   bind();
   if(state.step===7)document.querySelectorAll('.jc').forEach((el,i)=>{el.style.animationDelay=`${i*13}ms`;});
-  // Email form
-  document.getElementById('email-form')?.addEventListener('submit',async(e)=>{
-    e.preventDefault();
-    const email=document.getElementById('email-input').value;
-    const btn=e.target.querySelector('button');
-    btn.textContent='Sending...';btn.disabled=true;
-    try{
-      await fetch('https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,profile:getProfileType().name,field:state.field,edu:state.edu,goals:[...state.goals].join(',')})});
-      const sec=document.getElementById('email-section');
-      if(sec)sec.innerHTML='<p class="email-success">You are in. Welcome to the community - see you in your inbox.</p>';
-    }catch{btn.textContent='Send it';btn.disabled=false;}
-  });
 }
 
 function bind(){
