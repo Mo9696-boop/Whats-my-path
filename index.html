@@ -1,0 +1,731 @@
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk/index.css" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideR{from{opacity:0;transform:translateX(34px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideL{from{opacity:0;transform:translateX(-34px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scrollLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes scrollRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+@keyframes ringBreath{0%,100%{opacity:.12}50%{opacity:.04}}
+.rp{font-family:'Space Grotesk',var(--font-sans);max-width:740px;margin:0 auto;padding:0 1.25rem 1rem}
+.hero-wrap{background:#08192B;border-radius:24px;padding:3rem 3rem 2.5rem;margin:1rem 0 2rem;overflow:hidden;position:relative}
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(93,202,165,.35);pointer-events:none}
+.r1{width:280px;height:280px;right:-60px;top:-60px;animation:ringBreath 5s ease-in-out infinite}
+.r2{width:480px;height:480px;right:-160px;top:-160px;animation:ringBreath 5s ease-in-out infinite .9s}
+.r3{width:680px;height:680px;right:-260px;top:-260px;animation:ringBreath 5s ease-in-out infinite 1.8s}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:600;color:#5DCAA5;text-transform:uppercase;letter-spacing:.12em;margin-bottom:1.5rem;background:rgba(93,202,165,.1);padding:5px 12px 5px 8px;border-radius:100px;border:1px solid rgba(93,202,165,.2)}
+.edot{width:6px;height:6px;border-radius:50%;background:#5DCAA5}
+.hero-h1{font-size:44px;font-weight:700;color:white;line-height:1.1;margin-bottom:1.1rem;max-width:580px;letter-spacing:-.8px}
+.hero-h1 .hl{color:#5DCAA5}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.55);line-height:1.7;max-width:500px;margin-bottom:2.25rem}
+.hero-sub strong{color:rgba(255,255,255,.85);font-weight:600}
+.mq-wrap{overflow:hidden;margin:0 -3rem 2.25rem;padding:.3rem 0}
+.mq-row{display:flex;margin-bottom:9px}
+.mq-track{display:flex;gap:9px;animation:scrollLeft 40s linear infinite}
+.mq-track.rev{animation:scrollRight 48s linear infinite}
+.mpill{font-size:12px;padding:6px 15px;border-radius:100px;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.45);background:rgba(255,255,255,.04);white-space:nowrap;flex-shrink:0}
+.hero-actions{display:flex;align-items:center;gap:18px}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 30px;border-radius:12px;background:#1D9E75;color:white;border:none;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s,transform .15s;font-family:'Space Grotesk',var(--font-sans)}
+.hero-cta:hover{background:#0F6E56;transform:translateY(-2px)}
+.hero-cta svg{width:14px;height:14px;stroke:white;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.hero-note{font-size:13px;color:rgba(255,255,255,.35)}
+.hero-stats{display:flex;gap:3rem;margin-top:2.25rem;padding-top:2.25rem;border-top:1px solid rgba(255,255,255,.08)}
+.hs-num{font-size:26px;font-weight:700;color:white;letter-spacing:-.5px}
+.hs-lbl{font-size:12px;color:rgba(255,255,255,.38);margin-top:2px}
+.creator-strip{display:flex;align-items:center;gap:13px;margin-top:1.75rem;padding-top:1.75rem;border-top:1px solid rgba(255,255,255,.08)}
+.c-by{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.12em;font-weight:600;margin-bottom:3px}
+.c-name{font-size:14px;font-weight:700;color:white;display:flex;align-items:center;gap:8px}
+.phd{font-size:11px;padding:2px 9px;border-radius:20px;background:rgba(29,158,117,.2);color:#5DCAA5;border:1px solid rgba(29,158,117,.3);font-weight:700}
+.prog-wrap{padding-top:1.5rem;margin-bottom:2rem}
+.prog-info{display:flex;justify-content:space-between;margin-bottom:.6rem}
+.prog-label{font-size:13px;font-weight:700;color:var(--color-text-primary)}
+.prog-steps{display:flex;gap:5px}
+.ps{height:4px;border-radius:100px;background:var(--color-border-tertiary);transition:background .4s;flex:1}
+.ps.done,.ps.active{background:#1D9E75}
+.step{animation:slideR .3s cubic-bezier(.25,.46,.45,.94) both}
+.step.back{animation:slideL .3s cubic-bezier(.25,.46,.45,.94) both}
+.step-ey{font-size:11px;font-weight:600;color:#1D9E75;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.25rem;display:flex;align-items:center;gap:8px}
+.step-ey::before{content:'';width:18px;height:2px;background:#1D9E75}
+h2.st{font-size:32px;font-weight:700;color:var(--color-text-primary);margin-bottom:.5rem;line-height:1.15;letter-spacing:-.5px}
+.ss{font-size:15px;color:var(--color-text-secondary);margin-bottom:1.75rem;line-height:1.65;max-width:560px}
+.opt-list{display:flex;flex-direction:column;gap:9px;margin-bottom:1rem}
+.opt{display:flex;align-items:center;gap:16px;padding:17px 20px;border:1.5px solid var(--color-border-tertiary);border-radius:14px;cursor:pointer;transition:border-color .18s,background .18s,transform .18s}
+.opt:hover{border-color:#9FE1CB;transform:translateX(5px)}
+.opt.sel{border:2px solid #1D9E75;background:#E1F5EE;transform:translateX(5px);animation:pop .22s ease}
+.opt-key{width:34px;height:34px;border-radius:9px;border:1.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--color-text-secondary);flex-shrink:0;transition:all .18s}
+.opt.sel .opt-key{background:#1D9E75;border-color:#1D9E75;color:white}
+.opt-body{flex:1;min-width:0}
+.opt-title{font-size:15px;font-weight:700;color:var(--color-text-primary)}
+.opt-desc{font-size:13px;color:var(--color-text-secondary);margin-top:2px}
+.opt.sel .opt-title{color:#085041}
+.opt.sel .opt-desc{color:#0F6E56}
+.opt-arr{font-size:16px;color:var(--color-border-secondary);flex-shrink:0}
+.opt.sel .opt-arr{color:#1D9E75;font-size:14px;font-weight:700}
+.kb-hint{font-size:11px;color:var(--color-text-secondary);margin-top:.5rem;text-align:right;opacity:.7}
+.skgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.25rem}
+@media(max-width:520px){.skgrid{grid-template-columns:1fr}}
+.skc{padding:20px;border:1.5px solid var(--color-border-tertiary);border-radius:16px;cursor:pointer;position:relative;overflow:hidden;transition:transform .18s,border-color .18s,background .18s}
+.skc:hover{transform:translateY(-3px)}
+.skc.sel{animation:pop .22s ease}
+.skc-bar{position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:16px 0 0 16px;opacity:0;transition:opacity .2s}
+.skc.sel .skc-bar{opacity:1}
+.skc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:13px}
+.skc-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.skc-icon svg{width:21px;height:21px;stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.skc-chk{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;transition:all .2s}
+.skc-t{font-size:14px;font-weight:700;color:var(--color-text-primary);margin-bottom:3px;line-height:1.28}
+.skc-s{font-size:12px;line-height:1.4}
+.skc-n{font-size:11px;margin-top:7px;font-weight:600;height:0;overflow:hidden;transition:height .2s}
+.skc:hover .skc-n,.skc.sel .skc-n{height:17px}
+.combo-lbl{font-size:13px;font-weight:700;color:var(--color-text-primary);margin-bottom:.875rem;display:flex;align-items:center;gap:8px}
+.combo-lbl::before{content:'';width:3px;height:16px;background:#1D9E75;border-radius:2px}
+.btnrow{display:flex;justify-content:space-between;align-items:center;margin-top:1.75rem}
+.btn{padding:12px 26px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s;border:1.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-primary);display:inline-flex;align-items:center;gap:7px;font-family:'Space Grotesk',var(--font-sans)}
+.btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.btn:hover{background:var(--color-background-secondary);transform:translateY(-1px)}
+.btn:active{transform:scale(.97)}
+.btn-p{background:#1D9E75;color:white;border-color:#1D9E75}
+.btn-p:hover{background:#0F6E56;border-color:#0F6E56}
+.btn-p:disabled{opacity:.35;cursor:not-allowed;pointer-events:none;transform:none}
+.selcount{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--color-text-secondary);margin-top:1rem}
+.selcount-badge{width:24px;height:24px;border-radius:50%;background:#1D9E75;color:white;font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.hint-t{font-size:12px;color:var(--color-text-secondary);margin-top:1rem;text-align:right}
+.loading-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5rem 2rem;text-align:center;animation:fadeUp .3s ease}
+.spin-wrap{position:relative;width:72px;height:72px;margin-bottom:2rem}
+.spin-ring{position:absolute;inset:0;border:3px solid var(--color-border-tertiary);border-top-color:#1D9E75;border-radius:50%;animation:spin .85s linear infinite}
+.spin-inner{position:absolute;inset:10px;border:2px solid var(--color-border-tertiary);border-bottom-color:#9FE1CB;border-radius:50%;animation:spin 1.5s linear infinite reverse}
+.load-title{font-size:24px;font-weight:700;color:var(--color-text-primary);letter-spacing:-.4px;margin-bottom:.75rem}
+.load-msg{font-size:14px;color:var(--color-text-secondary);min-height:22px}
+.load-bar-wrap{width:220px;height:4px;background:var(--color-border-tertiary);border-radius:100px;overflow:hidden;margin-top:2rem}
+.load-bar{height:100%;background:#1D9E75;border-radius:100px;width:0%;transition:width .45s ease}
+/* RESULTS */
+.profile-card{border-radius:20px;padding:30px 32px;margin-bottom:2rem}
+.profile-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px;opacity:.65}
+.profile-name{font-size:36px;font-weight:700;letter-spacing:-.6px;margin-bottom:.4rem;line-height:1.1}
+.profile-tagline{font-size:15px;font-weight:600;margin-bottom:1.1rem;opacity:.82}
+.profile-desc{font-size:14px;line-height:1.72;opacity:.78}
+.analysis-block{margin-bottom:2rem}
+.analysis-ey{font-size:11px;font-weight:700;color:#1D9E75;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.875rem;display:flex;align-items:center;gap:9px}
+.analysis-ey::before{content:'';width:16px;height:2px;background:#1D9E75}
+.analysis-para{font-size:15px;color:var(--color-text-secondary);line-height:1.78}
+.res-hero{background:#08192B;border-radius:16px;overflow:hidden;margin-bottom:1.5rem}
+.res-top{display:grid;grid-template-columns:110px 1fr}
+.res-left{padding:24px;border-right:1px solid rgba(255,255,255,.08)}
+.res-count{font-size:52px;font-weight:700;color:#5DCAA5;line-height:1;letter-spacing:-2px}
+.res-count-lbl{font-size:10px;color:rgba(255,255,255,.4);margin-top:4px;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.res-right{padding:24px}
+.res-phdr{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.09em;font-weight:700;margin-bottom:8px}
+.res-pline{font-size:13px;color:rgba(255,255,255,.65);margin-bottom:10px;font-weight:500}
+.res-pline strong{color:white;font-weight:700}
+.rpill-wrap{display:flex;flex-wrap:wrap;gap:5px}
+.rpill{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12);font-weight:500}
+.frow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.fc{padding:6px 15px;border-radius:100px;font-size:12px;border:1.5px solid var(--color-border-tertiary);background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:all .15s;white-space:nowrap;font-family:'Space Grotesk',var(--font-sans);font-weight:600}
+.fc:hover{transform:translateY(-1px);border-color:var(--color-border-secondary)}
+.fc.on{color:white}
+.jlist{display:flex;flex-direction:column;gap:8px;margin-bottom:2rem}
+.jc{border:1.5px solid var(--color-border-tertiary);border-radius:16px;overflow:hidden;animation:fadeUp .3s ease both;transition:border-color .2s,transform .15s;position:relative}
+.jc:hover{border-color:var(--color-border-secondary);transform:translateY(-2px)}
+.jc.top-match{border-color:#1D9E75;border-width:2px}
+.top-badge{position:absolute;top:0;right:20px;font-size:10px;padding:3px 10px;background:#1D9E75;color:white;border-radius:0 0 10px 10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;z-index:1}
+.jc-row{display:flex}
+.jc-side{width:4px;flex-shrink:0;align-self:stretch}
+.jc-inner{flex:1;min-width:0}
+.jc-head{padding:15px 18px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.jc-left{flex:1;min-width:0}
+.jc-title{font-size:15px;font-weight:700;color:var(--color-text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:-.15px}
+.jc-meta{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap;align-items:center}
+.stag{font-size:11px;padding:2px 9px;border-radius:20px;font-weight:600}
+.sring{position:relative;width:42px;height:42px;flex-shrink:0}
+.sring svg{width:42px;height:42px;transform:rotate(-90deg)}
+.sring-n{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--color-text-primary)}
+.chv{color:var(--color-text-secondary);transition:transform .25s;flex-shrink:0;font-size:18px;line-height:1}
+.chv.open{transform:rotate(180deg)}
+.jb{max-height:0;overflow:hidden;transition:max-height .38s ease}
+.jb.open{max-height:500px}
+.jb-in{padding:0 18px 18px;border-top:1px solid var(--color-border-tertiary)}
+.jb-desc{font-size:14px;color:var(--color-text-secondary);line-height:1.72;margin:15px 0 12px}
+.jb-match-lbl{font-size:10px;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.07em;font-weight:700;margin-bottom:8px}
+.jb-pills{display:flex;flex-wrap:wrap;gap:6px}
+.jb-pill{font-size:12px;padding:4px 12px;border-radius:20px;font-weight:600}
+.challenge-card{padding:26px 28px;background:var(--color-background-secondary);border-radius:16px;border:1px solid var(--color-border-tertiary);margin-bottom:2rem}
+.challenge-title{font-size:13px;font-weight:700;color:var(--color-text-primary);margin-bottom:1rem;display:flex;align-items:center;gap:9px}
+.challenge-para{font-size:14px;color:var(--color-text-secondary);line-height:1.72}
+.steps-list{display:flex;flex-direction:column;gap:14px;margin-top:.875rem}
+.step-item{display:flex;gap:14px;align-items:flex-start}
+.step-num{width:28px;height:28px;border-radius:50%;background:#1D9E75;color:white;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-text{font-size:14px;color:var(--color-text-secondary);line-height:1.68}
+.divider{height:1px;background:var(--color-border-tertiary);margin:2rem 0}
+.restart-row{display:flex;justify-content:center;padding-bottom:.5rem}
+.footer-attr{display:flex;align-items:center;justify-content:center;gap:10px;padding:1.25rem 0 .5rem;border-top:1px solid var(--color-border-tertiary);margin-top:.5rem}
+.fdot{width:5px;height:5px;border-radius:50%;background:#1D9E75}
+</style>
+<div class="rp"><div id="progbar"></div><div id="app"></div>
+<div class="footer-attr"><div class="fdot"></div>
+<span style="font-size:12px;color:var(--color-text-secondary)">A tool by</span>
+<span style="font-size:12px;font-weight:700;color:var(--color-text-primary)">Mohamad AL HAJJ</span>
+<span style="font-size:11px;padding:1px 8px;border-radius:20px;background:#E1F5EE;color:#0F6E56;border:1px solid #9FE1CB;font-weight:700">PhD</span></div></div>
+<script>
+const R1=['Data Scientist','Medical Science Liaison','Principal Investigator','Science Policy Advisor','Grant Writer','Venture Associate','Clinical Specialist','Postdoctoral Researcher','Lab Automation Engineer','Biostatistician','Science Communicator','Clinical Trial Scientist'];
+const R2=['Regulatory Affairs Specialist','Product Manager','Research Director','Chief Scientific Officer','Competitive Intelligence Analyst','Field Application Scientist','Management Consultant','Study Director','Computational Biologist','Portfolio Manager','UX Researcher','Investment Analyst'];
+const CPAL={bench:{bg:'#1D9E75',light:'#E1F5EE',text:'#085041',mid:'#9FE1CB'},design:{bg:'#378ADD',light:'#E6F1FB',text:'#0C447C',mid:'#B5D4F4'},data:{bg:'#7F77DD',light:'#EEEDFE',text:'#3C3489',mid:'#CECBF6'},synthesis:{bg:'#BA7517',light:'#FAEEDA',text:'#633806',mid:'#FAC775'},writing:{bg:'#D85A30',light:'#FAECE7',text:'#4A1B0C',mid:'#F5C4B3'},ops:{bg:'#639922',light:'#EAF3DE',text:'#173404',mid:'#C0DD97'},communication:{bg:'#D4537E',light:'#FBEAF0',text:'#4B1528',mid:'#F4C0D1'},partnerships:{bg:'#534AB7',light:'#EEEDFE',text:'#26215C',mid:'#AFA9EC'},strategy:{bg:'#888780',light:'#F1EFE8',text:'#2C2C2A',mid:'#D3D1C7'}};
+const CATS=[
+  {id:'bench',p:`<path d="M9 3h6M9 3v6l-4 6.5A2 2 0 006.7 19H17.3a2 2 0 001.7-3.5L15 9V3"/><line x1="6.5" y1="13.5" x2="17.5" y2="13.5"/>`,t:'Hands-on at the bench',s:'Lab work, assays, instruments, protocols',n:11},
+  {id:'design',p:`<circle cx="12" cy="12" r="9"/><polygon points="16.5 7.5 11 10.5 8 16 13.5 13"/>`,t:'Designing smarter studies',s:'Study protocols, methods, hypotheses',n:10},
+  {id:'data',p:`<rect x="3" y="13" width="4" height="8" rx="1"/><rect x="10" y="8" width="4" height="13" rx="1"/><rect x="17" y="4" width="4" height="17" rx="1"/>`,t:'Turning data into insight',s:'Statistics, modeling, visualization',n:12},
+  {id:'synthesis',p:`<path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>`,t:'Connecting ideas across fields',s:'Reviews, synthesis, knowledge mapping',n:10},
+  {id:'writing',p:`<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/>`,t:'Writing that moves ideas forward',s:'Papers, grants, regulatory documents',n:8},
+  {id:'ops',p:`<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>`,t:'Keeping research on track',s:'Compliance, coordination, oversight',n:13},
+  {id:'communication',p:`<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>`,t:'Making science land',s:'Outreach, education, media, translation',n:15},
+  {id:'partnerships',p:`<circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><line x1="12" y1="7" x2="5" y2="17"/><line x1="12" y1="7" x2="19" y2="17"/><line x1="5" y1="19" x2="19" y2="19"/>`,t:'Opening doors & building bridges',s:'Partnerships, stakeholder & client relations',n:10},
+  {id:'strategy',p:`<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>`,t:'Seeing the bigger picture',s:'Consulting, investment, strategic synthesis',n:14},
+];
+const EDU=[{id:'ms',l:"Master's student",d:"In the thick of it right now"},{id:'mg',l:"Master's graduate",d:"Done - ready to figure out what's next"},{id:'ps',l:"PhD student",d:"Deep in the work, eyes on the horizon"},{id:'pg',l:"PhD graduate",d:"Just landed, or about to"},{id:'pd',l:"Postdoctoral researcher",d:"Exploring what life after the bench looks like"}];
+const SATISFACTION=[{id:'excited',l:"Excited and genuinely curious",d:"I want to explore the full picture of where I could go"},{id:'comfortable',l:"Comfortable, but wondering",d:"Things are fine, but am I missing something better?"},{id:'change',l:"Ready for a real change",d:"I know I need a new direction - I just need to find it"},{id:'uncertain',l:"Uncertain and searching",d:"I genuinely don't know where I'm headed right now"},{id:'clear',l:"I have a sense of where I want to go",d:"I just need validation and a concrete roadmap"}];
+const GOALS=[{id:'academia',l:"Stay in academia",d:"Research or teaching at universities and research institutes"},{id:'phd',l:"Pursue a PhD",d:"I want to go deeper scientifically before deciding"},{id:'postdoc',l:"Do a PostDoc",d:"More research experience before committing to a direction"},{id:'rd',l:"Move to industry R&D",d:"Applied science in biotech, pharma, or deep tech"},{id:'industry',l:"Industry, beyond R&D",d:"Business, strategy, operations, or commercial roles"},{id:'scicomm',l:"Science communication",d:"Making science meaningful to people outside the lab"},{id:'consulting',l:"Consulting & strategy",d:"Smart advice across complex, changing problems"},{id:'policy',l:"Science policy & government",d:"Turning scientific evidence into decisions that matter"},{id:'startup',l:"Entrepreneurship",d:"Build something from scratch"},{id:'open',l:"Genuinely open",d:"Show me everything - I'll figure it out from there"}];
+const VALUES=[{id:'intellectual',l:"Intellectual freedom",d:"Curiosity-driven work, autonomous thinking, depth"},{id:'impact',l:"Real-world impact",d:"Knowing my work changes outcomes for real people"},{id:'financial',l:"Financial reward",d:"Strong compensation and clear career progression"},{id:'teaching',l:"Teaching & mentoring others",d:"Developing people is intrinsically rewarding to me"},{id:'building',l:"Building & creating",d:"Making things that didn't exist before"},{id:'reputation',l:"Scientific recognition",d:"Peer credibility, publications, professional esteem"},{id:'stability',l:"Stability & clear structure",d:"Predictable progression and a secure environment"},{id:'balance',l:"Work-life balance",d:"Sustainable pace, flexibility, personal time protected"}];
+const WORKSTYLE=[{id:'independent',l:"Independently",d:"Deep focus, minimal interruption - I do my best work alone"},{id:'small_team',l:"In a small, close-knit team",d:"Tight collaboration, shared ownership of outcomes"},{id:'stakeholders',l:"With lots of external interaction",d:"Clients, partners, stakeholders - I enjoy that complexity"},{id:'leading',l:"Leading and coordinating",d:"I want to orchestrate people and resources"},{id:'flexible',l:"Flexibly - whatever it takes",d:"I adapt to whatever the role or phase requires"}];
+const RISK=[{id:'stable',l:"Clear paths, proven trajectories",d:"I prefer knowing what's coming with a roadmap in hand"},{id:'moderate',l:"Moderate uncertainty is fine",d:"I can handle ambiguity when the direction feels right"},{id:'ambiguity',l:"Ambiguity genuinely energizes me",d:"I make it up as I go - and I thrive doing that"},{id:'bigswings',l:"Big swings only",d:"High risk, high reward - the only mode I find interesting"}];
+const ER={ms:0,mg:1,ps:2,pg:3,pd:4};
+const SC={'Academia':['#378ADD','#E6F1FB','#0C447C'],'Industry':['#1D9E75','#E1F5EE','#085041'],'Pharma / CRO':['#7F77DD','#EEEDFE','#3C3489'],'Consulting':['#BA7517','#FAEEDA','#633806'],'Policy & Gov.':['#D85A30','#FAECE7','#4A1B0C'],'Communication':['#D4537E','#FBEAF0','#4B1528'],'Finance & VC':['#639922','#EAF3DE','#173404'],'Operations':['#888780','#F1EFE8','#2C2C2A']};
+const JOBS=[
+  {t:"Principal Investigator / Professor",s:"Academia",c:['design','synthesis','writing','strategy'],g:['academia'],e:3,d:"Lead an independent research group at a university or research institute — defining scientific directions, securing funding, publishing, and mentoring the next generation of researchers. The pinnacle of the academic track."},
+  {t:"Postdoctoral Researcher",s:"Academia",c:['bench','design','synthesis'],g:['academia','postdoc'],e:3,d:"A focused research position after PhD, hosted at a university or institute. You deepen expertise in a new area, publish, and build your scientific track record toward an independent position."},
+  {t:"University Lecturer / Assistant Professor",s:"Academia",c:['synthesis','writing','communication'],g:['academia'],e:3,d:"Teach undergraduate and graduate courses while maintaining a research portfolio. A common entry point to the academic career track that balances teaching with scholarship."},
+  {t:"Research Fellow",s:"Academia",c:['bench','design','synthesis'],g:['academia','postdoc'],e:3,d:"An independent or semi-independent academic research position, typically at a university or research institute, focused on producing high-quality scientific output with greater autonomy than a standard postdoc."},
+  {t:"Research Scientist (Academic)",s:"Academia",c:['bench','design','data'],g:['academia'],e:2,d:"Conduct research within a lab or institute without the teaching and administrative burden of faculty. A specialist role for those who want to stay close to the science long-term."},
+  {t:"Research Engineer",s:"Academia",c:['bench','ops'],g:['academia','rd'],e:1,d:"Support and run research operations within academic labs or public research organizations. You manage equipment, experimental platforms, and research infrastructure — often specializing deeply in a methodology."},
+  {t:"Field Application Scientist",s:"Industry",c:['bench','communication'],g:['rd','industry'],e:1,d:"Support customers applying scientific instruments or reagents at their sites. You combine deep lab expertise with customer-facing technical training and scientific advocacy."},
+  {t:"R&D Scientist",s:"Industry",c:['bench','design'],g:['rd'],e:2,d:"Design and execute experiments that drive product or therapeutic development in a company setting. Bench science and research strategy go hand in hand."},
+  {t:"Quality Control Scientist",s:"Industry",c:['bench','ops'],g:['rd','industry'],e:1,d:"Ensure products meet rigorous quality and safety standards through systematic testing. You are the guardian of consistency and regulatory compliance."},
+  {t:"Process Development Scientist",s:"Industry",c:['bench','design'],g:['rd'],e:1,d:"Develop and optimize manufacturing processes from lab scale to industrial production. You close the gap between discovery and scalable manufacturing."},
+  {t:"Lab Manager",s:"Academia",c:['bench','ops'],g:['academia','rd'],e:1,d:"Manage the day-to-day operations of a research lab — staff, supplies, equipment, and safety. You make the science possible without running it yourself."},
+  {t:"Study Director (GLP)",s:"Pharma / CRO",c:['design','ops'],g:['rd','industry'],e:2,d:"Oversee preclinical studies under GLP regulations, bearing full scientific and regulatory responsibility for study integrity from start to finish."},
+  {t:"Clinical Trial Scientist",s:"Pharma / CRO",c:['design','ops'],g:['rd','industry'],e:2,d:"Design and oversee the scientific aspects of clinical trials from protocol development to data review. Rigorous, ethical, and regulatory-compliant by nature."},
+  {t:"Health Outcomes Researcher",s:"Pharma / CRO",c:['design','data','synthesis'],g:['rd','consulting'],e:2,d:"Measure the impact of treatments on patient quality of life, health economics, and real-world outcomes. Your work directly shapes market access and pricing decisions."},
+  {t:"Human Factors Engineer",s:"Industry",c:['design','communication'],g:['rd','industry'],e:1,d:"Study how people interact with medical devices or software to optimize usability and safety. Cognitive science, design, and regulatory requirements converge here."},
+  {t:"Research Manager",s:"Academia",c:['design','ops'],g:['academia','rd'],e:2,d:"Coordinate and oversee a portfolio of research projects within a lab or department, keeping scientific quality, timelines, and resources in alignment."},
+  {t:"Data Scientist",s:"Industry",c:['data','strategy'],g:['rd','industry','consulting','open'],e:0,d:"Apply machine learning, statistics, and visualization to extract actionable insights from complex datasets. A highly transferable role from virtually any quantitative research background."},
+  {t:"Biostatistician",s:"Pharma / CRO",c:['data','design'],g:['rd','industry'],e:1,d:"Design statistical analyses for clinical and preclinical studies, interpreting results for regulatory submissions. Your methodological rigor directly impacts drug approval."},
+  {t:"Bioinformatician",s:"Academia",c:['data','synthesis'],g:['academia','rd'],e:1,d:"Develop pipelines and tools for large-scale biological datasets at the powerful intersection of genomics, transcriptomics, and computational science."},
+  {t:"Computational Scientist",s:"Academia",c:['data','design'],g:['academia','rd'],e:2,d:"Build and apply computational models to answer scientific questions across disciplines. You push the boundaries of simulation, prediction, and modeling."},
+  {t:"Machine Learning Scientist",s:"Industry",c:['data'],g:['rd','industry'],e:2,d:"Develop ML algorithms applied to scientific problems — drug discovery, diagnostics, or materials science. Deep technical expertise meets domain knowledge."},
+  {t:"Data Engineer",s:"Industry",c:['data'],g:['industry','rd'],e:0,d:"Build and maintain the data infrastructure — pipelines, warehouses, and APIs — that scientists and analysts rely on. You turn raw data chaos into clean, accessible assets."},
+  {t:"Quantitative Analyst",s:"Finance & VC",c:['data','strategy'],g:['industry','consulting'],e:2,d:"Apply statistical and mathematical models to analyze markets, assess risk, or value assets. Researchers with strong quantitative skills are highly sought in finance."},
+  {t:"Medical Writer",s:"Communication",c:['writing','synthesis'],g:['industry','scicomm'],e:2,d:"Create clinical study reports, regulatory submissions, and scientific publications for pharma and medical communications. Precision, clarity, and scientific rigor are your trademarks."},
+  {t:"Science Writer",s:"Communication",c:['writing','synthesis','communication'],g:['scicomm','open'],e:0,d:"Translate complex research findings into clear, engaging content for professional or public audiences — in journals, media, or institutional outlets. Scientific literacy meets craft."},
+  {t:"Scientific Editor",s:"Communication",c:['writing','synthesis'],g:['scicomm','open'],e:2,d:"Review manuscripts for scientific journals or publishers, ensuring rigor, clarity, and significance before publication. A respected role in the scholarly ecosystem."},
+  {t:"Grant Writer / Research Development Officer",s:"Academia",c:['writing','strategy','synthesis'],g:['academia','open'],e:2,d:"Write and manage competitive funding applications for academic institutions. You turn scientific ambition into compelling, fundable proposals."},
+  {t:"Technical Writer",s:"Industry",c:['writing','communication'],g:['industry','open'],e:0,d:"Produce manuals, standard operating procedures, and documentation for products or processes. Clear, precise communication makes complex systems accessible."},
+  {t:"Policy Analyst / Policy Advisor",s:"Policy & Gov.",c:['synthesis','strategy','writing'],g:['policy','consulting'],e:1,d:"Synthesize scientific evidence to inform government policy, regulatory frameworks, or institutional strategy. You make research matter beyond academic circles."},
+  {t:"Technology Transfer Officer",s:"Operations",c:['synthesis','strategy','ops'],g:['industry','policy'],e:2,d:"Identify, protect, and commercialize research outputs — managing IP, licensing deals, and spin-off support. You bridge the lab and the marketplace."},
+  {t:"Competitive Intelligence Analyst",s:"Consulting",c:['synthesis','data','strategy'],g:['consulting','industry'],e:1,d:"Monitor and analyze the scientific and commercial landscape to provide actionable intelligence to R&D or business teams. Your synthesis becomes competitive advantage."},
+  {t:"Regulatory Affairs Specialist",s:"Pharma / CRO",c:['ops','writing','synthesis'],g:['industry','rd'],e:1,d:"Navigate global regulatory requirements to bring drugs, devices, or diagnostics to market. You prepare dossiers, liaise with agencies like FDA and EMA, and manage compliance."},
+  {t:"Clinical Project Manager",s:"Pharma / CRO",c:['ops','design'],g:['industry'],e:2,d:"Lead clinical trials from design through completion — coordinating teams, sites, budgets, and timelines. A high-impact leadership role at the heart of drug development."},
+  {t:"Clinical Research Coordinator",s:"Pharma / CRO",c:['ops','partnerships'],g:['industry','rd'],e:0,d:"Coordinate the day-to-day operations of clinical trials at study sites — recruiting patients, collecting data, and ensuring protocol adherence. The backbone of clinical research."},
+  {t:"Research Operations Manager",s:"Academia",c:['ops','strategy'],g:['academia','open'],e:1,d:"Oversee the administrative and operational functions of a research institute or department so that science can flourish without friction."},
+  {t:"Program Officer (Research Funder)",s:"Policy & Gov.",c:['ops','strategy','synthesis'],g:['policy','open'],e:2,d:"Evaluate grant applications, manage funding portfolios, and engage with the scientific community on behalf of a foundation or government agency. You shape what science gets funded."},
+  {t:"Medical Science Liaison (MSL)",s:"Pharma / CRO",c:['communication','partnerships','synthesis'],g:['industry','rd'],e:3,d:"Bridge scientific expertise and the medical community by engaging key opinion leaders and sharing clinical evidence. A non-promotional scientific role with high visibility and autonomy."},
+  {t:"Science Communicator / Outreach Officer",s:"Communication",c:['communication','partnerships'],g:['scicomm','open'],e:0,d:"Design and deliver programs connecting science with the public through events, exhibitions, and campaigns. Often based in museums, universities, or NGOs."},
+  {t:"Science Educator / University Lecturer",s:"Academia",c:['communication','synthesis'],g:['academia','scicomm'],e:1,d:"Teach science at secondary, undergraduate, or postgraduate level. Helping others understand complex ideas and develop critical thinking — lasting, tangible impact."},
+  {t:"Director of Communications",s:"Communication",c:['communication','writing','strategy'],g:['scicomm','industry'],e:2,d:"Lead the communications strategy for a research institution, company, or foundation — managing media, stakeholders, and scientific reputation at a senior level."},
+  {t:"Business Development Manager (Life Sciences)",s:"Industry",c:['partnerships','strategy','communication'],g:['industry','startup'],e:2,d:"Identify partnership, licensing, and market opportunities to grow a biotech or pharma business. Scientific understanding meets commercial instinct."},
+  {t:"External Relations Manager",s:"Academia",c:['partnerships','strategy'],g:['academia','policy'],e:1,d:"Build and maintain partnerships between research institutions and industry, government, or civil society. You open institutional doors and steward high-value relationships."},
+  {t:"Management Consultant (Life Sciences)",s:"Consulting",c:['strategy','data','synthesis'],g:['consulting'],e:2,d:"Advise pharma, biotech, or healthcare organizations on strategy, operations, and transformation. Structured thinking and scientific credibility solve complex business problems."},
+  {t:"Life Sciences Strategy Consultant",s:"Consulting",c:['strategy','synthesis','data'],g:['consulting'],e:2,d:"Help biopharma or medtech companies navigate competitive landscapes, portfolio decisions, and market access at a specialized consulting firm. High autonomy, high impact."},
+  {t:"Venture Capital Analyst",s:"Finance & VC",c:['strategy','data','synthesis'],g:['startup','industry'],e:2,d:"Evaluate biotech and life science investment opportunities — conducting due diligence, building models, and assessing scientific and commercial merit. You fund tomorrow's breakthroughs."},
+  {t:"Venture Associate",s:"Finance & VC",c:['strategy','partnerships','synthesis'],g:['startup','industry'],e:2,d:"Source deals, support portfolio companies, and contribute to investment decisions at a life science venture fund. For scientists who think like entrepreneurs and investors."},
+  {t:"Product Manager (Biotech / Medtech)",s:"Industry",c:['strategy','partnerships','design'],g:['industry','startup'],e:1,d:"Define and drive development of scientific products from concept to market, coordinating R&D, regulatory, and commercial teams. Translate user needs into product roadmaps."},
+  {t:"Research Director",s:"Academia",c:['strategy','design','ops'],g:['academia','rd'],e:3,d:"Lead the scientific direction of a department, institute, or company research division — balancing vision, team leadership, and resource stewardship at a senior level."},
+  {t:"Science Policy Advisor",s:"Policy & Gov.",c:['strategy','synthesis','writing'],g:['policy','open'],e:2,d:"Inform public policy with scientific evidence — advising government, parliamentary bodies, or intergovernmental organizations. Research that matters beyond the lab."},
+  {t:"Startup Founder / Co-founder",s:"Industry",c:['strategy','partnerships','communication'],g:['startup'],e:0,d:"Build a company from a scientific or technological idea — validating the market, assembling a team, and raising funding. Demands resilience, vision, and a high tolerance for uncertainty."},
+  {t:"Chief Scientific Officer (CSO)",s:"Industry",c:['strategy','design','partnerships'],g:['startup','rd'],e:3,d:"Lead the scientific vision of a company as a senior executive — setting research strategy, managing teams, and representing scientific credibility to investors and partners."},
+];
+const SECTORS=[...new Set(JOBS.map(j=>j.s))];
+const KEYS='ABCDEFGHIJ';
+let state={step:-1,edu:null,satisfaction:null,goals:new Set(),cats:new Set(),values:new Set(),workstyle:null,risk:null,filter:'All',dir:1,loading:false};
+const cl=id=>CATS.find(c=>c.id===id)?.t||id;
+const svgA=`<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>`;
+const svgB=`<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>`;
+
+function getProfileType(){
+  const c=state.cats,v=state.values,r=state.risk,w=state.workstyle;
+  const h=(s,id)=>s.has(id)?1:0;
+  const types=[
+    {id:'deep_scientist',name:'The Deep Scientist',tagline:'Built for depth, driven by curiosity',col:'#1D9E75',
+     desc:"Your scientific identity is inseparable from closeness to the work — experiments, hypotheses, and the patient accumulation of evidence. You do your best thinking with focused, uninterrupted time and genuine intellectual freedom. That is not a limitation. It is the profile of researchers who generate the foundational ideas that everyone else builds on.",
+     s:h(c,'bench')*4+h(c,'design')*3+h(v,'intellectual')*4+h(v,'reputation')*2+(r==='stable'?2:0)+(w==='independent'?3:0)+(w==='small_team'?1:0)},
+    {id:'data_thinker',name:'The Data Thinker',tagline:'Where complexity becomes clarity',col:'#7F77DD',
+     desc:"You see patterns where others see noise. Given complex, messy data, you do not get overwhelmed — you get curious. The ability to transform quantitative complexity into actionable insight is one of the most commercially valuable capabilities a researcher can carry out of academic training.",
+     s:h(c,'data')*5+h(c,'synthesis')*2+h(v,'impact')*2+h(v,'financial')*2+(r==='moderate'?2:0)},
+    {id:'storyteller',name:'The Science Storyteller',tagline:'The rare researcher who can make it land',col:'#D4537E',
+     desc:"You have something genuinely rare: the ability to make complex science not just understandable but compelling — to funders who need to prioritize it, patients who need to understand it, and publics who need to trust it. That translation layer is where enormous amounts of scientific and societal value get created.",
+     s:h(c,'communication')*5+h(c,'writing')*4+h(v,'teaching')*3+h(v,'impact')*2+(w==='stakeholders'?2:0)},
+    {id:'strategic_mind',name:'The Strategic Mind',tagline:'Science meets business at the highest level',col:'#BA7517',
+     desc:"You zoom out naturally. Competitive landscapes, resource allocation, long-term implications of today's decisions — these are the problems that genuinely interest you. That is not a diversion from science. It is a different and equally sophisticated form of scientific thinking applied to organizations instead of experiments.",
+     s:h(c,'strategy')*5+h(c,'data')*2+h(v,'financial')*3+h(v,'building')*2+(w==='leading'?3:0)},
+    {id:'bridge_builder',name:'The Bridge Builder',tagline:'Connections that create real value',col:'#378ADD',
+     desc:"You connect people, organizations, and ideas that would not have connected without you. Your value is not only what you know — it is what becomes possible when you are in the room. Scientific partnerships, licensing deals, collaborative consortia: these rarely happen on their own. They happen because someone with your instincts made them happen.",
+     s:h(c,'partnerships')*5+h(c,'communication')*3+h(v,'impact')*2+(w==='stakeholders'?3:0)+(w==='small_team'?1:0)},
+    {id:'knowledge_architect',name:'The Knowledge Architect',tagline:'Building frameworks others rely on',col:'#639922',
+     desc:"You read broadly and synthesize deeply. Given a complex scientific landscape, you do not just summarize it — you map it, identify the gaps, and build frameworks that others can genuinely use. That is the foundation of outstanding scientific writing, rigorous policy analysis, and the kind of intellectual consulting that commands serious respect.",
+     s:h(c,'synthesis')*5+h(c,'writing')*3+h(v,'intellectual')*3+h(v,'reputation')*2+(w==='independent'?2:0)},
+    {id:'entrepreneur',name:'The Science Entrepreneur',tagline:'Risk is fuel, not obstacle',col:'#D85A30',
+     desc:"You build things. Risk energizes rather than paralyzes you — you see opportunity where others see uncertainty. You are comfortable moving before all the information is in, and you understand intuitively that the biggest cost is often inaction. In a world that desperately needs founders who understand the science, that profile is genuinely rare.",
+     s:h(v,'building')*4+(r==='bigswings'?4:0)+(r==='ambiguity'?3:0)+h(c,'strategy')*2+h(c,'partnerships')*2},
+    {id:'research_orchestrator',name:'The Research Orchestrator',tagline:'Science, organized and led',col:'#534AB7',
+     desc:"You orchestrate. Whether in academia or industry, your natural role is organizing people, resources, and timelines around scientific goals — and making sure the outcome is greater than the sum of its parts. Research managers, laboratory directors, and R&D program leaders: that is the territory where your profile consistently produces its greatest impact.",
+     s:(w==='leading'?5:0)+h(c,'ops')*3+h(v,'reputation')*2+h(v,'impact')*2+h(c,'partnerships')*2},
+  ];
+  return types.sort((a,b)=>b.s-a.s)[0];
+}
+
+function getOpening(){
+  const e=state.edu,s=state.satisfaction;
+  const m={
+    ms_excited:"You are in the best possible position: scientifically grounded enough to have real preferences, but early enough in your career that those preferences can still shape your direction. Researchers who explore their options at the Master's level — rather than defaulting to the obvious next step — consistently end up in roles that fit better and that they sustain longer.",
+    ms_comfortable:"The comfort of a known path is real, but so is the risk of optimizing for the familiar over the meaningful. Your Master's degree has opened more doors than the academic system typically makes visible. This analysis is an invitation to look through more of them before you commit.",
+    ms_change:"Deciding to pivot direction at the Master's level is, strategically, one of the best moments to do it. Your technical skills are real, your scientific literacy is established, and the career equity you have built is far more portable than the standard narrative suggests.",
+    ms_uncertain:"Uncertainty at this stage usually means one of two things: you have not yet found the option that genuinely fits, or you have seen enough of the landscape to know that the obvious answers are not satisfying. Both are worth investigating — and this analysis is designed to help you tell the difference.",
+    ms_clear:"Having clarity at the Master's level is genuinely rare. What follows will help you sharpen that intuition and build the concrete roadmap to match it.",
+    ps_excited:"There is a particular kind of PhD student who stays curious about the bigger picture even while running experiments — and they are usually the ones who end up doing the most interesting work, wherever they land. That intellectual restlessness you feel is not a distraction. It is a signal worth following.",
+    ps_comfortable:"Midway through a PhD, it is easy to defer the question indefinitely. The lab is absorbing, the milestones are clear, and career exploration feels premature. But the researchers who navigate post-PhD transitions most successfully are almost always those who started thinking seriously about it two years before finishing — not two months.",
+    ps_change:"Feeling ready for a change during a PhD is worth examining carefully — not to dismiss the feeling, but to understand precisely what is driving it. Is it the specific project? The academic culture? The mode of working? The answer to that question shapes everything that follows. What is clear is that the analytical skills you are building are more transferable than most advisors will tell you.",
+    ps_uncertain:"PhD uncertainty often comes from being honest enough to see the academic system clearly — its rewards, its real constraints, its culture — and not yet finding a version of what comes after that fully resonates. That clarity about what you do not want is actually the beginning of figuring out what you do.",
+    ps_clear:"Having a clear sense of direction during a PhD — and still being deliberate enough to pressure-test that clarity — is a sign of strong self-awareness. This analysis will either reinforce what you already sense or surface something you had not considered.",
+    pg_excited:"Finishing a PhD and feeling genuinely excited rather than just relieved is not universal. If curiosity about what comes next is what is driving you forward, that is a strong signal about the kind of environment you will do your best work in — one that rewards initiative and continues to create new problems worth solving.",
+    pg_comfortable:"The post-PhD moment can feel deceptively settled — especially if a postdoc or familiar next step is in front of you. But the window between completing a PhD and committing to the next phase is one of the few genuinely open moments in a research career. This analysis is designed to help you use it deliberately.",
+    pg_change:"The decision to change direction after a PhD is one the academic system makes unnecessarily difficult. But researchers who make this transition deliberately and early consistently outperform those who drift. Your PhD-level skills are rare outside academia. Most employers have not been told how to find you — but they need you.",
+    pg_uncertain:"Post-PhD uncertainty is, in many ways, the appropriate response to completing something that was designed to be deep and singular. What comes next genuinely has no obvious answer when you have just spent 4-5 years doing something without a natural continuation. This analysis is designed to help you build one.",
+    pg_clear:"Finishing a PhD with clear direction is a significant advantage. The challenge at this stage is not knowing where you want to go — it is building the right bridge to get there efficiently, without unnecessary detours.",
+    mg_excited:"Your Master's is behind you, and the fact that you are still curious rather than just relieved tells you something important: your intellectual drive is not credential-dependent. That matters for what kind of work you will actually find fulfilling long-term.",
+    mg_comfortable:"A completed Master's and a comfortable sense of direction: solid foundations. But comfortable in career terms sometimes means not yet fully tested. This is a good moment to pressure-test that comfort and see what holds.",
+    mg_change:"Wanting to pivot after a Master's is more strategically sound than the academic world tends to acknowledge. The analytical skills, the scientific literacy, the research methodology — none of it is lost. All of it is more portable than you have probably been told.",
+    mg_uncertain:"Uncertainty after a Master's is often a sign that you have seen enough to know the landscape is complex, but not yet enough to know your place in it. That is a starting point, not a limitation.",
+    mg_clear:"Clarity after a Master's gives you something most people at this stage do not have: a head start. What follows is about converting that clarity into a concrete, executable strategy.",
+    pd_excited:"Postdocs who remain genuinely curious about what comes next — rather than grinding toward one more paper — navigate career transitions better and faster than those who defer the question. The fact that you are actively exploring puts you measurably ahead.",
+    pd_comfortable:"Postdoc comfort is a double-edged state. The research is engaging, the environment is familiar, and there is always one more paper before making a decision. This analysis is a deliberate prompt to actually make the decision — because the window of maximum optionality does not stay open indefinitely.",
+    pd_change:"Deciding during a postdoc that the academic track is not the path takes courage — and a recognition that honesty usually produces better outcomes than persistence in the wrong direction. The skills you have accumulated at this level are genuinely rare outside academia, and largely invisible to you because you are surrounded by people who have the same ones.",
+    pd_uncertain:"Postdoc uncertainty often comes from having seen the full academic machine up close — and having an honest reaction to what you found. If the PI track does not excite you the way it once did, that is data. This analysis is designed to help you interpret what that data means.",
+    pd_clear:"Having clarity at the postdoc level — whether it points toward a PI position or toward something else — is the product of years of careful, close observation. The analysis that follows will help you build on that clarity rather than second-guess it.",
+  };
+  return m[`${e}_${s}`]||"You are at a pivotal moment in your research career, and the decisions you make now will shape the next decade significantly.";
+}
+
+function getStrengths(){
+  const cats=[...state.cats],vals=[...state.values];
+  const sp={bench:"hands-on technical expertise and the ability to generate reliable experimental data",design:"the capacity to design rigorous studies and choose the right methodological approaches",data:"fluency with quantitative analysis, statistics, and extracting signal from complex datasets",synthesis:"the ability to read across a field, connect disparate ideas, and build conceptual frameworks that others can use",writing:"the ability to communicate scientific ideas with precision, clarity, and authority",ops:"operational intelligence — the ability to build systems, ensure quality, and keep complex scientific programs on track",communication:"the gift for translating scientific complexity into insight that different audiences can actually act on",partnerships:"the instinct to build relationships and catalyze collaboration across different types of people and organizations",strategy:"strategic thinking — the ability to zoom out, read competitive landscapes, and identify where to invest effort"};
+  const vp={intellectual:"driven by intellectual curiosity and the need for deep, autonomous thinking",impact:"motivated by real-world impact — the knowledge that your work connects to meaningful outcomes for actual people",financial:"clear-eyed about financial reward as a legitimate and meaningful dimension of career satisfaction",teaching:"energized by developing others — mentoring, teaching, and knowledge transfer are intrinsically rewarding to you, not secondary obligations",building:"a maker at heart — you want to build things, systems, or organizations that did not exist before",reputation:"motivated in part by scientific recognition and peer credibility — reputation within your field matters to you",stability:"someone who performs best in environments with clear structures and predictable progression",balance:"deliberately oriented toward sustainability — you understand that the best careers are marathons, not sprints"};
+  const topC=cats.slice(0,3).map(c=>sp[c]).filter(Boolean);
+  const topV=vals.slice(0,2).map(v=>vp[v]).filter(Boolean);
+  let t="Your scientific profile is built on ";
+  if(topC.length===1)t+=topC[0];
+  else if(topC.length===2)t+=`${topC[0]} and ${topC[1]}`;
+  else t+=`${topC[0]}, ${topC[1]}, and ${topC[2]}`;
+  t+=". ";
+  if(topV.length>=1){t+=`At the level of values and motivation, you are ${topV[0]}`;if(topV.length>=2)t+=`, and ${topV[1]}`;t+=". ";}
+  const c=state.cats;
+  if(c.has('data')&&c.has('strategy'))t+="The combination of data fluency and strategic thinking is among the most commercially transferable profiles that comes out of research environments — it is the specific package that management consulting, life sciences strategy, and R&D leadership actively recruit for.";
+  else if(c.has('bench')&&c.has('strategy'))t+="The combination of hands-on scientific depth and strategic thinking is unusual and genuinely valuable. You can operate credibly at the bench and in the boardroom — which opens leadership and advisory roles that purely technical or purely business-trained people cannot easily fill.";
+  else if(c.has('data')&&c.has('communication'))t+="The combination of data fluency and communication effectiveness is rare — most researchers are strong in one or the other. It puts you in a category that can both generate insight and make it land with the people who need to act on it. That double capability is specifically what many high-value roles require.";
+  else if(c.has('writing')&&c.has('synthesis'))t+="Writing and synthesis are individually common in research — but the combination produces something specifically powerful: the ability to build knowledge frameworks and communicate them with authority. That is the foundation of great scientific writing, outstanding consulting work, and rigorous policy analysis.";
+  else if(c.has('bench')&&c.has('communication'))t+="The combination of hands-on technical expertise and communication effectiveness is what the best field scientists, clinical specialists, and science educators share — and what makes them genuinely trusted by their audiences in ways that purely technical profiles often are not.";
+  else t+="This profile makes you effective in environments where scientific depth needs to connect with something beyond the lab — whether that is data systems, human relationships, ideas, or institutional strategy.";
+  return t;
+}
+
+function getCareerFit(type){
+  const goals=[...state.goals],ws=state.workstyle;
+  const hasAcademic=goals.some(g=>['academia','postdoc','phd'].includes(g));
+  const hasIndustry=goals.some(g=>['rd','industry','consulting','startup','policy'].includes(g));
+  let t='';
+  if(goals.includes('open')||(hasAcademic&&hasIndustry))t="The breadth of directions you are holding is not indecision — it is intellectual honesty about a genuinely complex landscape. Researchers who explore widely at this stage and then converge deliberately tend to end up in better-fit positions than those who narrowed too early. ";
+  else if(goals.includes('phd'))t="The decision to pursue a PhD is worth making with the same rigor you would apply to any scientific question. The key variable is not the degree itself — it is the supervisor relationship and the scientific question you will spend years on. Both need to genuinely excite you, because they will define the next 4-5 years of your professional life. ";
+  else if(goals.includes('postdoc'))t="A strategic postdoc is one where you are acquiring a specific capability or credential you do not currently have, that opens a specific door you genuinely want to open. If you cannot articulate that capability and that door clearly, the postdoc may be a deferral rather than a strategy — and that distinction matters in three years. ";
+  else if(hasAcademic&&!hasIndustry)t="Your gravitational pull toward academic and research environments is worth treating as real data rather than default inertia. The question is not whether academia is a good choice in the abstract — it is whether it is the right fit for your specific profile, working style, and values as they actually are. ";
+  else if(!hasAcademic&&hasIndustry)t="Your orientation toward applied and industry environments places you in the middle of where the most interesting scientific work is increasingly being done. The line between real research and industry research has been dissolving for over a decade — and many of the most consequential breakthroughs now come from exactly the kind of environments you are drawn to. ";
+  else if(goals.includes('scicomm'))t="Science communication is both more accessible and more competitive than it appears from the outside. The people who break in and sustain careers in this space are almost always those with genuine scientific depth combined with a writing or media practice they have already started building independently. ";
+  const tins={
+    deep_scientist:"Researchers with your profile — technically deep, intellectually driven, and most productive with focused time — need to be selective about environments. The best fits are institutions and companies that genuinely value deep expertise rather than just claiming to. That includes some academic settings, some industry research positions, and specialist technical roles in organizations that understand the difference between a scientist and a technician.",
+    data_thinker:"Your data orientation combined with your scientific training gives you something the market genuinely needs more of: people who understand both the biology and the mathematics, not just one. Industry, consulting, and data-intensive academic environments are all undersupplied by candidates with your combination.",
+    storyteller:"The ability to make science land with different audiences — at depth, not just through simplification — is one of the most consistently undervalued skills in the scientific world. Medical communications, science journalism, patient education, institutional communications, and educational content are all areas where your profile creates immediate value.",
+    strategic_mind:"Your strategic orientation positions you well for roles at the intersection of scientific credibility and business decision-making. The scientific background is the credential; the strategic thinking is what you are actually being hired for — in consulting, business development, portfolio management, and senior industry leadership.",
+    bridge_builder:"What you bring to any role is the ability to make things happen that would not happen without you — licensing deals, collaborative projects, advisory relationships, funding conversations. That capability is specifically valuable in technology transfer, business development, clinical partnerships, and scientific account management.",
+    knowledge_architect:"Your synthesis orientation is the foundation of some of the most intellectually rich careers in science: strategic intelligence, regulatory writing, policy analysis, scientific editing, grant development, and knowledge management. The common thread is the transformation of complexity into usable, actionable frameworks.",
+    entrepreneur:"Your tolerance for risk and your building orientation define someone who is either founding something, joining something early, or actively making a scientific organization function significantly better than it otherwise would. The question is finding the specific problem worth that level of commitment.",
+    research_orchestrator:"Your leadership and coordination orientation means your maximum impact comes not from contributing to a research program, but from running one — in academia, industry, or at a larger scientific organization.",
+  };
+  t+=(tins[type.id]||'Your profile suggests strong fit with roles requiring scientific credibility paired with broader capabilities.')+' ';
+  const wsa={independent:"Given that you do your best work with focused, uninterrupted time, that preference should be a genuine filter when evaluating roles — not an afterthought. Environments that require constant context-switching, meeting-heavy cultures, or open-plan offices tend to actively disadvantage profiles like yours.",small_team:"The close-team working dynamic you prefer tends to be most consistently available in smaller organizations, specialist units, or early-stage ventures — worth factoring into how you compare large-company versus boutique or startup environments.",stakeholders:"Your comfort with client and stakeholder interaction is a specific differentiator in roles where most researchers find that dimension of the work draining. It significantly expands your viable options into client-facing scientific and advisory roles.",leading:"Your leadership orientation will be most clearly expressed in roles where you are not just contributing to outcomes but coordinating the effort to produce them. Look deliberately for roles with people-management responsibility, not just technical ownership.",flexible:"Your adaptability across working modes — deep focus, collaboration, stakeholder engagement — is genuinely useful in environments that require researchers to shift between different contexts as the work evolves."};
+  t+=(wsa[ws]||'');
+  return t;
+}
+
+function getChallenge(){
+  const r=state.risk,v=state.values;
+  const rt={stable:"A preference for clear, stable paths can sometimes lead to optimizing for security over genuine fit. The most fulfilling careers are not always the most predictable ones — and some paths that initially look uncertain become substantially more stable once you understand them from the inside. The risk of not exploring is real, and it compounds over time.",moderate:"Moderate risk tolerance is the most adaptive position — enough stability to function, enough openness to evolve. The challenge is making sure moderate does not become a way of perpetually waiting for more certainty before deciding. At some point, every meaningful career move requires acting with incomplete information.",ambiguity:"Your comfort with ambiguity is a genuine asset — but in a career context, ambiguity can sometimes become a cover for avoiding the discomfort of committing. Open to everything eventually needs to become committed to something specific. This analysis is designed to help you find what that something is.",bigswings:"High risk tolerance is genuinely rare and valuable in specific contexts. Worth pairing it with honest self-assessment about what precisely you are willing to be uncertain about — income, geography, professional status, belonging to a peer community. High risk, high reward covers a very wide range of actual lived experiences."};
+  let t=rt[r]||'';
+  const vi=[...v];
+  if(vi.includes('intellectual')&&vi.includes('financial'))t+=" One specific tension worth naming honestly: intellectual freedom and strong financial reward are both legitimate priorities, but they pull in opposite directions in most research career paths. The careers that maximize intellectual autonomy tend to be structurally underpaid relative to the skill required. The careers that pay well tend to constrain intellectual freedom. The sweet spot exists — typically in specialized consulting, senior industry roles with real technical focus, or well-funded research environments — but it requires deliberate seeking.";
+  else if(vi.includes('stability')&&vi.includes('building'))t+=" You have identified both stability and building as important to you — worth sitting with, because they pull in opposite directions. The most interesting things to build tend to require the most tolerance for uncertainty. Being deliberate about which you are actually optimizing for in any given role will save you from significant disappointment.";
+  else if(vi.includes('balance')&&vi.includes('impact'))t+=" The combination of meaningful work-life balance and significant real-world impact is worth thinking through honestly. The roles that deliver the largest measurable impact tend to make serious demands on time and energy, especially in their earlier phases. That does not make the combination impossible, but it requires being specific about which version of each you are actually comparing.";
+  else if(vi.includes('reputation')&&vi.includes('impact'))t+=" Scientific reputation and real-world impact are both legitimate motivators — but they do not always move together. Some of the highest-impact work in research generates real-world change with limited academic visibility. Being clear on which matters more to you in practice will help you evaluate options more honestly.";
+  else t+=" The most important thing to stress-test right now is the gap between what career paths look like from the outside and what they actually require on the inside. Informational interviews — real conversations with people already doing the work you are considering — are the single most efficient way to close that gap before committing to a direction.";
+  return t;
+}
+
+function getNextSteps(type){
+  const e=state.edu,goals=[...state.goals];
+  const steps=[];
+  const es={ms:"Map the 3-5 roles you are most curious about and find one person doing each of them with a research background. Ask for a 20-minute conversation — not for advice, but to understand what the path actually looks like from the inside. You will learn more from five real conversations than from months of online research.",mg:"Spend 90 minutes rewriting your experience in the language of the field you are targeting — not your academic CV, but a version that translates what you have done into terms that field actually uses. The gap between what you have done and what hiring managers are looking for is usually much smaller than it appears.",ps:"Talk to at least three researchers who completed PhDs in adjacent fields and went in the direction you are considering — not to ask what you should do, but to understand what the transition actually looked like, what surprised them, and what they would do differently.",pg:"Identify five specific companies, institutions, or organizations doing work you find genuinely interesting. Research each one specifically: their pipelines, their recent hires, their scientific agenda. Targeted applications from people who understand what a specific organization is actually building get through filters that generic applications do not.",pd:"Your most urgent task is probably not applying to more roles — it is translating your specific research experience into language that non-academic hiring managers can evaluate. Draft a one-page summary of what you have done and what it enables you to do, in plain language. Send it to someone outside your field. If they follow it, you are ready to use it."};
+  steps.push(es[e]||"Map your target roles and start having real conversations with people already doing them.");
+  if(goals.includes('startup'))steps.push("Before fundraising or incorporating anything: write a 300-word problem statement for the scientific challenge you want to address. Not a solution, not a business plan — a problem. If you cannot write it clearly, the idea is not ready. If you can, you have the beginning of a credible pitch.");
+  else if(goals.includes('phd'))steps.push("If a PhD is genuinely where you are headed, spend real time identifying supervisors whose scientific questions excite you — not just whose labs have funding or reputation. The supervisor relationship is the single most consequential variable in PhD success, completion, and what your career looks like afterward. Apply to the person, not the institution.");
+  else if(goals.includes('postdoc'))steps.push("A strategic postdoc is one where you are acquiring a specific capability or credential you do not currently have, that opens a specific door you want to open. If you cannot articulate what that capability is and what that door is, the postdoc is likely a deferral rather than a strategy — and that distinction matters for how you will feel about it in three years.");
+  else if(goals.includes('academia'))steps.push("If the academic track is genuinely where you are heading, backward-plan from the specific positions you want: which publications would make you competitive, at which kinds of departments, under which conditions. The PI track is a specific game with specific rules — knowing them explicitly beats discovering them by accident during your postdoc.");
+  else if(goals.includes('consulting'))steps.push("Entry into life sciences consulting with a research background is most efficient when you target firms with active practices in your scientific domain. Research the specific practice areas at five to six firms, identify their recent engagements in your field, and make the connection explicit in your application. The generic consulting track was not designed for research PhDs.");
+  else if(goals.includes('policy'))steps.push("Science policy has specific entry points that vary by geography: parliamentary science fellowships, government science advisor programs, think tank positions, and intergovernmental organization secondments. Identify three programs most relevant to your country and field, and understand their application windows — most require planning 6-12 months ahead.");
+  else if(goals.includes('rd'))steps.push("Industry R&D applications from academia succeed when they are specific: the company's pipeline connects to your research experience, and you have made that connection explicit. Before applying to any role, spend 20 minutes understanding what that specific company is trying to build — then show them exactly why your background is relevant to that specific challenge.");
+  else steps.push("Before writing a single application: write one paragraph describing the work you want to be doing in five years. Make it specific enough that a stranger could read it and understand what you mean. If you cannot write it yet, that is the signal that more exploration is needed first — and that is useful information.");
+  steps.push("Find your scientific field's most active professional community — a Slack group, LinkedIn network, professional society, or subject-specific conference — and identify five people whose career trajectories look like what you want yours to look like in ten years. Follow their work. Engage with it genuinely. The career conversations that actually move things forward rarely start with a cold application.");
+  const ts={deep_scientist:"Be explicit with yourself about what kind of scientific environment you actually thrive in — not what you think you should want, but what your experience tells you. The researchers who force themselves into high-pressure, fast-paced environments when they genuinely need depth and focus rarely do their best work there. Environment fit is not a luxury — it is a performance requirement.",data_thinker:"Build a visible portfolio of data work that demonstrates your capabilities outside a purely academic context. GitHub, Kaggle, a personal analytics project, open-source scientific tools — these signal competence in ways that publications alone do not, especially to industry hiring managers who do not know how to read an academic publication list.",storyteller:"Start writing publicly, if you have not already. A consistent body of accessible scientific writing — a newsletter, a column, a blog — is one of the most direct signals you can send to organizations that hire science communicators and medical writers. It also builds an audience, which is genuine currency in this space.",strategic_mind:"Develop a point of view on a specific strategic question in your scientific domain: a market that is underserved, a technology that has been overvalued, a regulatory shift that most people have not fully processed. Consultants and strategy teams hire people with perspectives, not just knowledge.",bridge_builder:"Your value is most visible when you are actively making connections happen — not just when you say you could. Before your next career conversation, identify two people in different parts of your field who should know each other and introduce them. That action, repeated deliberately, is how your network becomes your most professionally visible asset.",knowledge_architect:"Develop one piece of synthesis work that would be genuinely useful to someone outside academia: a landscape analysis, a systematic review of an emerging area, a guide to a complex regulatory framework. Put it where people can find it. Career conversations that come from visible intellectual work are consistently better than those that come from cold applications.",entrepreneur:"Talk to three founders with scientific backgrounds — not famous ones, but people who are two to four years into building something in your domain. Ask specifically what they wish they had known at the stage you are currently at. The gap between the founding narrative and the actual experience is information that genuinely changes decisions.",research_orchestrator:"Actively seek opportunities to coordinate something — a lab meeting series, a collaborative project, a training program, a conference session — before you are officially given the role to do so. Research leaders who get early opportunities are almost always the ones who started leading informally first."};
+  steps.push(ts[type.id]||"Build one concrete piece of work — a portfolio item, a project, a piece of writing — that makes your capabilities visible to the people you want to work with.");
+  return steps.slice(0,4);
+}
+
+function scoreJobs(){
+  const ur=ER[state.edu]||0;
+  const hasOpen=state.goals.has('open');
+  return JOBS.map(j=>{
+    const mc=j.c.filter(c=>state.cats.has(c));
+    if(!mc.length)return{...j,score:0,mc};
+    const ss=(mc.length/j.c.length)*60;
+    const matchGoal=j.g.some(g=>state.goals.has(g));
+    const gs=(matchGoal||hasOpen)?25:(j.g.includes('open')&&state.goals.size>0?5:0);
+    const es=ur>=j.e?10:Math.max(0,10-(j.e-ur)*5);
+    let vb=0;
+    if(state.values.has('intellectual')&&j.s==='Academia')vb+=4;
+    if(state.values.has('financial')&&(j.s==='Finance & VC'||j.s==='Consulting'))vb+=4;
+    if(state.values.has('teaching')&&(j.c.includes('communication')||j.s==='Academia'))vb+=3;
+    if(state.values.has('building')&&j.g.includes('startup'))vb+=4;
+    if(state.values.has('stability')&&(j.s==='Academia'||j.s==='Operations'))vb+=2;
+    return{...j,score:Math.round(ss+gs+es+vb),mc};
+  }).sort((a,b)=>b.score-a.score).filter(j=>j.score>15);
+}
+
+function renderProg(){
+  if(state.step<0||state.loading){document.getElementById('progbar').innerHTML='';return;}
+  const total=6;
+  const labels=['Background','Current state','Directions','Strengths','Values','How you work'];
+  const cur=Math.min(state.step,total-1);
+  document.getElementById('progbar').innerHTML=`<div class="prog-wrap">
+    <div class="prog-info">
+      <span class="prog-label">${labels[cur]||'Results'}</span>
+      <span style="font-size:12px;color:var(--color-text-secondary);font-weight:600">Question ${Math.min(state.step+1,total)} of ${total}</span>
+    </div>
+    <div class="prog-steps">${Array.from({length:total},(_,i)=>`<div class="ps${i<state.step?' done':i===state.step?' active':''}"></div>`).join('')}</div>
+  </div>`;}
+
+function mq(arr,rev){const d=[...arr,...arr].map(t=>`<span class="mpill">${t}</span>`).join('');return`<div class="mq-row"><div class="mq-track${rev?' rev':''}">${d}</div></div>`;}
+
+function skCard(c){
+  const col=CPAL[c.id]||{bg:'#888',light:'#eee',text:'#333',mid:'#ccc'};
+  const sel=state.cats.has(c.id);
+  return`<div class="skc${sel?' sel':''}" data-cat="${c.id}" style="background:${sel?col.light:'var(--color-background-primary)'};border-color:${sel?col.bg:'var(--color-border-tertiary)'}${sel?';border-width:2px':''}">
+    <div class="skc-bar" style="background:${col.bg}"></div>
+    <div class="skc-top">
+      <div class="skc-icon" style="background:${sel?col.bg:col.light}"><svg viewBox="0 0 24 24" style="stroke:${sel?'white':col.bg}">${c.p}</svg></div>
+      <div class="skc-chk" style="background:${sel?col.bg:'transparent'};border-color:${sel?col.bg:'var(--color-border-tertiary)'};color:${sel?'white':'transparent'}">${sel?'✓':''}</div>
+    </div>
+    <div class="skc-t" style="color:${sel?col.text:'var(--color-text-primary)'}">${c.t}</div>
+    <div class="skc-s" style="color:${sel?col.bg:'var(--color-text-secondary)'}">${c.s}</div>
+    <div class="skc-n" style="color:${col.bg}">${c.n} career paths unlocked</div>
+  </div>`;}
+
+function ring(s){const r=16,circ=2*Math.PI*r,d=(circ*(s/100)).toFixed(1);return`<div class="sring"><svg viewBox="0 0 42 42"><circle cx="21" cy="21" r="${r}" fill="none" stroke="var(--color-border-tertiary)" stroke-width="2.5"/><circle cx="21" cy="21" r="${r}" fill="none" stroke="#1D9E75" stroke-width="2.5" stroke-dasharray="${d} ${circ.toFixed(1)}" stroke-linecap="round"/></svg><div class="sring-n">${s}%</div></div>`;}
+
+function optList(items,key,sel){
+  const isSel=id=>sel instanceof Set?sel.has(id):sel===id;
+  return`<div class="opt-list">${items.map((it,i)=>`<div class="opt${isSel(it.id)?' sel':''}" data-${key}="${it.id}"><div class="opt-key">${KEYS[i]}</div><div class="opt-body"><div class="opt-title">${it.l}</div><div class="opt-desc">${it.d}</div></div><div class="opt-arr">${isSel(it.id)?'✓':'›'}</div></div>`).join('')}</div>`;}
+
+function heroHTML(){return`<div class="hero-wrap"><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+  <div class="eyebrow"><div class="edot"></div>Deep career assessment · Built for researchers</div>
+  <div class="hero-h1">You trained for one career.<br>You qualify for <span class="hl">dozens.</span></div>
+  <p class="hero-sub">Most researchers only ever hear about <strong>3 options</strong>. I mapped <strong>80+</strong>. Answer 6 honest questions and leave with a full analysis of where you actually fit — including academic paths, postdocs, and PhDs.</p>
+  <div class="mq-wrap">${mq(R1,false)}${mq(R2,true)}</div>
+  <div class="hero-actions"><button class="hero-cta" id="start-btn">Start my assessment ${svgA}</button><span class="hero-note">Free · About 7 minutes</span></div>
+  <div class="hero-stats"><div><div class="hs-num">80+</div><div class="hs-lbl">career paths mapped</div></div><div><div class="hs-num">6</div><div class="hs-lbl">deep questions</div></div><div><div class="hs-num">8</div><div class="hs-lbl">researcher profiles</div></div></div>
+  <div class="creator-strip"><div style="width:1px;height:28px;background:rgba(255,255,255,.15)"></div><div><div class="c-by">Designed &amp; built by</div><div class="c-name">Mohamad AL HAJJ <span class="phd">PhD</span></div></div></div>
+</div>`;}
+
+function eduHTML(){return`<div class="step${state.dir<0?' back':''}">
+  <div class="step-ey">Question 1 of 6</div>
+  <h2 class="st">Where are you right now?</h2>
+  <p class="ss">This shapes the entire analysis that follows. Be honest — there is no right answer here.</p>
+  ${optList(EDU,'edu',state.edu)}
+  <p class="kb-hint">Press A–E to select, Enter to continue</p>
+  <div class="btnrow"><button class="btn" id="bck">${svgB} Back</button><button class="btn btn-p" id="nxt" ${!state.edu?'disabled':''}>Continue ${svgA}</button></div>
+</div>`;}
+
+function satHTML(){return`<div class="step${state.dir<0?' back':''}">
+  <div class="step-ey">Question 2 of 6</div>
+  <h2 class="st">How do you honestly feel about your current path?</h2>
+  <p class="ss">This is the most revealing question in the whole assessment. Answer what you actually feel — not what you think you should feel.</p>
+  ${optList(SATISFACTION,'sat',state.satisfaction)}
+  <p class="kb-hint">Press A–E to select, Enter to continue</p>
+  <div class="btnrow"><button class="btn" id="bck">${svgB} Back</button><button class="btn btn-p" id="nxt" ${!state.satisfaction?'disabled':''}>Continue ${svgA}</button></div>
+</div>`;}
+
+function goalHTML(){
+  const n=state.goals.size;
+  return`<div class="step${state.dir<0?' back':''}">
+  <div class="step-ey">Question 3 of 6</div>
+  <h2 class="st">What directions genuinely interest you?</h2>
+  <p class="ss">Select all that apply — including academic paths, further studies, or postdocs. The more you select, the richer your results. There are no wrong answers.</p>
+  ${optList(GOALS,'goal',state.goals)}
+  ${n>0?`<div class="selcount"><span class="selcount-badge">${n}</span>${n} direction${n>1?'s':''} selected</div>`:`<p class="hint-t">Select at least one to continue</p>`}
+  <p class="kb-hint">Press A–J to toggle, Enter to continue</p>
+  <div class="btnrow"><button class="btn" id="bck">${svgB} Back</button><button class="btn btn-p" id="nxt" ${n===0?'disabled':''}>Continue ${svgA}</button></div>
+</div>`;}
+
+function skillsHTML(){
+  const n=state.cats.size;
+  return`<div class="step${state.dir<0?' back':''}">
+  <div class="step-ey">Question 4 of 6</div>
+  <h2 class="st">What genuinely energizes you?</h2>
+  <p class="ss">Not what your CV says you are good at — what you would actually choose to spend your time doing, given real freedom to choose. Select everything that resonates.</p>
+  <div class="skgrid">${CATS.map(c=>skCard(c)).join('')}</div>
+  ${n>0?`<div class="selcount"><span class="selcount-badge">${n}</span>${n} area${n>1?'s':''} selected</div>`:`<p class="hint-t">Select at least one to continue</p>`}
+  <div class="btnrow" style="margin-top:1.25rem"><button class="btn" id="bck">${svgB} Back</button><button class="btn btn-p" id="nxt" ${n===0?'disabled':''}>Continue ${svgA}</button></div>
+</div>`;}
+
+function valuesHTML(){
+  const n=state.values.size;
+  return`<div class="step${state.dir<0?' back':''}">
+  <div class="step-ey">Question 5 of 6</div>
+  <h2 class="st">What matters most to you at work?</h2>
+  <p class="ss">Select everything that genuinely matters — not what sounds admirable, but what you would actually trade for if you had to make a real choice. This is where the analysis gets personal.</p>
+  ${optList(VALUES,'val',state.values)}
+  ${n>0?`<div class="selcount"><span class="selcount-badge">${n}</span>${n} value${n>1?'s':''} selected</div>`:`<p class="hint-t">Select at least one to continue</p>`}
+  <div class="btnrow"><button class="btn" id="bck">${svgB} Back</button><button class="btn btn-p" id="nxt" ${n===0?'disabled':''}>Last question ${svgA}</button></div>
+</div>`;}
+
+function workRiskHTML(){
+  const ok=state.workstyle&&state.risk;
+  return`<div class="step${state.dir<0?' back':''}">
+  <div class="step-ey">Question 6 of 6</div>
+  <h2 class="st">Finally — how do you work and relate to risk?</h2>
+  <p class="ss">Two quick things. These will shape both your profile type and the honest assessment in your results.</p>
+  <div style="margin-bottom:1.75rem">
+    <div class="combo-lbl">How do you work best?</div>
+    ${optList(WORKSTYLE,'ws',state.workstyle)}
+  </div>
+  <div>
+    <div class="combo-lbl">Your relationship with uncertainty and risk?</div>
+    ${optList(RISK,'rk',state.risk)}
+  </div>
+  <div class="btnrow" style="margin-top:1.5rem"><button class="btn" id="bck">${svgB} Back</button><button class="btn btn-p" id="nxt" ${!ok?'disabled':''}>Build my career map ${svgA}</button></div>
+</div>`;}
+
+const MSGS=['Analyzing your 6 responses...','Building your researcher profile...','Matching career paths...','Writing your personal analysis...','Almost ready...'];
+
+function loadingHTML(){return`<div class="loading-screen">
+  <div class="spin-wrap"><div class="spin-ring"></div><div class="spin-inner"></div></div>
+  <div class="load-title">Building your career map...</div>
+  <div class="load-msg" id="load-msg">${MSGS[0]}</div>
+  <div class="load-bar-wrap"><div class="load-bar" id="load-bar"></div></div>
+</div>`;}
+
+function startLoading(){
+  let i=0,pct=0;
+  const mi=setInterval(()=>{i=Math.min(i+1,MSGS.length-1);const el=document.getElementById('load-msg');if(el)el.textContent=MSGS[i];},400);
+  const bi=setInterval(()=>{pct=Math.min(pct+4,94);const el=document.getElementById('load-bar');if(el)el.style.width=pct+'%';},80);
+  setTimeout(()=>{clearInterval(mi);clearInterval(bi);const el=document.getElementById('load-bar');if(el)el.style.width='100%';setTimeout(()=>{state.loading=false;render();},200);},2200);
+}
+
+function animateNum(id,target){
+  const el=document.getElementById(id);if(!el)return;
+  let n=0;const s=Math.max(1,Math.ceil(target/28));
+  const t=setInterval(()=>{n=Math.min(n+s,target);el.textContent=n;if(n>=target)clearInterval(t);},28);
+}
+
+function resultsHTML(){
+  const type=getProfileType();
+  const all=scoreJobs();
+  const shown=state.filter==='All'?all:all.filter(j=>j.s===state.filter);
+  const cnames=[...state.cats].map(cl);
+  const glabels=[...state.goals].map(id=>GOALS.find(g=>g.id===id)?.l).filter(Boolean).join(' · ');
+  const elabel=EDU.find(e=>e.id===state.edu)?.l||'';
+  const steps=getNextSteps(type);
+  const opening=getOpening();
+  const strengths=getStrengths();
+  const careerFit=getCareerFit(type);
+  const challenge=getChallenge();
+  return`<div class="step${state.dir<0?' back':''}">
+
+  <div class="profile-card" style="background:${type.col}">
+    <div class="profile-label" style="color:rgba(255,255,255,.65)">Your researcher profile</div>
+    <div class="profile-name" style="color:white">${type.name}</div>
+    <div class="profile-tagline" style="color:rgba(255,255,255,.8)">${type.tagline}</div>
+    <div class="profile-desc" style="color:rgba(255,255,255,.76)">${type.desc}</div>
+  </div>
+
+  <div class="analysis-block">
+    <div class="analysis-ey">Where you are coming from</div>
+    <p class="analysis-para">${opening}</p>
+  </div>
+
+  <div class="analysis-block">
+    <div class="analysis-ey">What makes you distinctly you</div>
+    <p class="analysis-para">${strengths}</p>
+  </div>
+
+  <div class="analysis-block">
+    <div class="analysis-ey">Why these career paths fit your profile</div>
+    <p class="analysis-para">${careerFit}</p>
+  </div>
+
+  <div class="res-hero">
+    <div class="res-top">
+      <div class="res-left"><div class="res-count" id="res-count">0</div><div class="res-count-lbl">matching paths</div></div>
+      <div class="res-right">
+        <div class="res-phdr">Your profile snapshot</div>
+        <div class="res-pline"><strong>${elabel}</strong> · ${glabels}</div>
+        <div class="rpill-wrap">${cnames.map(n=>`<span class="rpill">${n}</span>`).join('')}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="frow">
+    <button class="fc on" data-f="All" style="background:#1D9E75">All (${all.length})</button>
+    ${SECTORS.filter(s=>all.some(j=>j.s===s)).map(s=>{
+      const col=SC[s]||['#888','#eee','#333'];
+      const cnt=all.filter(j=>j.s===s).length;
+      const on=state.filter===s;
+      return`<button class="fc${on?' on':''}" data-f="${s}" style="${on?`background:${col[0]}`:`color:${col[0]};border-color:${col[0]}55`}">${s} (${cnt})</button>`;
+    }).join('')}
+  </div>
+
+  <div class="jlist">${shown.map((j,i)=>{
+    const col=SC[j.s]||['#888','#eee','#333'];
+    const isTop=i===0&&state.filter==='All';
+    return`<div class="jc${isTop?' top-match':''}" style="animation-delay:${i*15}ms">
+      ${isTop?`<div class="top-badge">Top match</div>`:''}
+      <div class="jc-row">
+        <div class="jc-side" style="background:${col[0]}"></div>
+        <div class="jc-inner">
+          <div class="jc-head" onclick="tog(this)">
+            <div class="jc-left">
+              <div class="jc-title">${j.t}</div>
+              <div class="jc-meta">
+                <span class="stag" style="background:${col[1]};color:${col[2]}">${j.s}</span>
+                ${j.mc.slice(0,2).map(cid=>{const p=CPAL[cid]||{light:'#E1F5EE',text:'#0F6E56',mid:'#9FE1CB'};return`<span style="font-size:11px;padding:2px 9px;border-radius:20px;background:${p.light};color:${p.text};border:1px solid ${p.mid};font-weight:600">${cl(cid)}</span>`;}).join('')}
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">${ring(j.score)}<div class="chv">&#8964;</div></div>
+          </div>
+          <div class="jb">
+            <div class="jb-in">
+              <p class="jb-desc">${j.d}</p>
+              ${j.mc.length?`<div class="jb-match-lbl">Why it fits you</div><div class="jb-pills">${j.mc.map(cid=>{const p=CPAL[cid]||{light:'#E1F5EE',text:'#0F6E56',mid:'#9FE1CB'};return`<span class="jb-pill" style="background:${p.light};color:${p.text};border:1px solid ${p.mid}">${cl(cid)}</span>`;}).join('')}</div>`:''}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('')}</div>
+
+  <div class="challenge-card">
+    <div class="challenge-title">
+      <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#BA7517;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      An honest heads up
+    </div>
+    <p class="challenge-para">${challenge}</p>
+  </div>
+
+  <div class="analysis-block">
+    <div class="analysis-ey">Your next concrete moves</div>
+    <div class="steps-list">
+      ${steps.map((s,i)=>`<div class="step-item"><div class="step-num">${i+1}</div><div class="step-text">${s}</div></div>`).join('')}
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="restart-row"><button class="btn" onclick="restart()">Start over</button></div>
+</div>`;}
+
+function tog(head){
+  const jb=head.closest('.jc-inner').querySelector('.jb');
+  const chv=head.querySelector('.chv');
+  if(jb)jb.classList.toggle('open');
+  if(chv)chv.classList.toggle('open');
+}
+function restart(){state={step:-1,edu:null,satisfaction:null,goals:new Set(),cats:new Set(),values:new Set(),workstyle:null,risk:null,filter:'All',dir:1,loading:false};render();}
+
+function render(){
+  renderProg();
+  const a=document.getElementById('app');
+  if(state.step<0){a.innerHTML=heroHTML();}
+  else if(state.loading){a.innerHTML=loadingHTML();startLoading();}
+  else if(state.step===0){a.innerHTML=eduHTML();}
+  else if(state.step===1){a.innerHTML=satHTML();}
+  else if(state.step===2){a.innerHTML=goalHTML();}
+  else if(state.step===3){a.innerHTML=skillsHTML();}
+  else if(state.step===4){a.innerHTML=valuesHTML();}
+  else if(state.step===5){a.innerHTML=workRiskHTML();}
+  else{a.innerHTML=resultsHTML();requestAnimationFrame(()=>animateNum('res-count',scoreJobs().length));}
+  a.innerHTML=a.innerHTML.replace(/—/g,' - ');
+  bind();
+  if(state.step===6)document.querySelectorAll('.jc').forEach((el,i)=>{el.style.animationDelay=`${i*14}ms`;});
+}
+
+function bind(){
+  const s=document.getElementById('start-btn');if(s)s.addEventListener('click',()=>{state.dir=1;state.step=0;render();});
+  document.querySelectorAll('[data-edu]').forEach(el=>el.addEventListener('click',()=>{state.edu=el.dataset.edu;render();}));
+  document.querySelectorAll('[data-sat]').forEach(el=>el.addEventListener('click',()=>{state.satisfaction=el.dataset.sat;render();}));
+  document.querySelectorAll('[data-goal]').forEach(el=>el.addEventListener('click',()=>{const id=el.dataset.goal;state.goals.has(id)?state.goals.delete(id):state.goals.add(id);render();}));
+  document.querySelectorAll('[data-cat]').forEach(el=>el.addEventListener('click',()=>{const id=el.dataset.cat;state.cats.has(id)?state.cats.delete(id):state.cats.add(id);render();}));
+  document.querySelectorAll('[data-val]').forEach(el=>el.addEventListener('click',()=>{const id=el.dataset.val;state.values.has(id)?state.values.delete(id):state.values.add(id);render();}));
+  document.querySelectorAll('[data-ws]').forEach(el=>el.addEventListener('click',()=>{state.workstyle=el.dataset.ws;render();}));
+  document.querySelectorAll('[data-rk]').forEach(el=>el.addEventListener('click',()=>{state.risk=el.dataset.rk;render();}));
+  document.querySelectorAll('[data-f]').forEach(el=>el.addEventListener('click',()=>{state.filter=el.dataset.f;render();}));
+  const n=document.getElementById('nxt');if(n)n.addEventListener('click',()=>{
+    if(state.step===5){state.loading=true;state.step=6;}else{state.dir=1;state.step++;}render();
+  });
+  const b=document.getElementById('bck');if(b)b.addEventListener('click',()=>{state.dir=-1;state.step--;render();});
+}
+
+document.addEventListener('keydown',e=>{
+  if(state.step>=0&&state.step<=5){
+    const maps=[EDU,SATISFACTION,null,WORKSTYLE,RISK];
+    if(state.step===2){
+      const idx=KEYS.toLowerCase().indexOf(e.key.toLowerCase());
+      if(idx>=0&&idx<GOALS.length){const id=GOALS[idx].id;state.goals.has(id)?state.goals.delete(id):state.goals.add(id);render();return;}
+      if(e.key==='Enter'&&state.goals.size>0){state.dir=1;state.step++;render();}
+    } else if(state.step===3){
+      if(e.key==='Enter'&&state.cats.size>0){state.dir=1;state.step++;render();}
+    } else if(state.step===4){
+      const idx=KEYS.toLowerCase().indexOf(e.key.toLowerCase());
+      if(idx>=0&&idx<VALUES.length){const id=VALUES[idx].id;state.values.has(id)?state.values.delete(id):state.values.add(id);render();return;}
+      if(e.key==='Enter'&&state.values.size>0){state.dir=1;state.step++;render();}
+    } else {
+      const items=[EDU,SATISFACTION,null,null,null,null][state.step];
+      if(items){
+        const idx=KEYS.toLowerCase().indexOf(e.key.toLowerCase());
+        if(idx>=0&&idx<items.length){
+          if(state.step===0)state.edu=items[idx].id;
+          else if(state.step===1)state.satisfaction=items[idx].id;
+          render();return;
+        }
+      }
+      if(e.key==='Enter'){
+        const ready=[state.edu,state.satisfaction,null,null,null,state.workstyle&&state.risk][state.step];
+        if(ready){if(state.step===5){state.loading=true;state.step=6;}else{state.dir=1;state.step++;}render();}
+      }
+    }
+  }
+});
+render();
+</script>
