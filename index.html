@@ -629,23 +629,25 @@ function startLoading(){
     clearInterval(mi);clearInterval(bi);
     const el=document.getElementById('load-bar');if(el)el.style.width='100%';
     await saveStats();
-    try {
-  const type = getProfileType();
-  fetch('https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbw4sXJxXNTLIB71PK3cY8RB4eaApgncxkZzlgt79uYmuQ0aPT_szEOiCLnAZ-KOVoBqcg/exec/exec', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      timestamp: new Date().toISOString(),
-      profile: type.name,
-      field: state.field || 'not specified',
-      edu: state.edu || '',
-      satisfaction: state.satisfaction || '',
-      goals: [...state.goals].join(', '),
-      cats: [...state.cats].join(', '),
-      risk: state.risk || ''
-    })
-  });
-} catch(err) { console.log('Analytics error:', err); }
+    try{
+      const type=getProfileType();
+      const payload=JSON.stringify({
+          timestamp:new Date().toISOString(),
+          profile:type.name,
+          field:state.field||'not specified',
+          edu:state.edu||'',
+          satisfaction:state.satisfaction||'',
+          goals:[...state.goals].join(', '),
+          cats:[...state.cats].join(', '),
+          risk:state.risk||''
+        });
+      fetch('https://script.google.com/macros/s/AKfycbw4sXJxXNTLIB71PK3cY8RB4eaApgncxkZzlgt79uYmuQ0aPT_szEOiCLnAZ-KOVoBqcg/exec',{
+        method:'POST',
+        mode:'no-cors',
+        headers:{'Content-Type':'text/plain'},
+        body:payload
+      });
+    }catch(err){console.log('Analytics error:',err);}
     setTimeout(()=>{state.loading=false;render();},200);
   },2400);
 }
