@@ -197,6 +197,59 @@ h2.st{font-size:32px;font-weight:700;color:var(--color-text-primary);margin-bott
 .restart-row{display:flex;justify-content:center;padding-bottom:.5rem}
 .footer-attr{display:flex;align-items:center;justify-content:center;gap:10px;padding:1.25rem 0 .5rem;border-top:1px solid var(--color-border-tertiary);margin-top:.5rem}
 .fdot{width:5px;height:5px;border-radius:50%;background:#1D9E75}
+/* ROADMAP SECTION */
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.roadmap-teaser{border-radius:20px;overflow:hidden;margin:2rem 0;position:relative}
+.roadmap-teaser-inner{background:linear-gradient(135deg,#08192B 0%,#0d2a1f 50%,#08192B 100%);padding:36px 32px;position:relative;overflow:hidden}
+.roadmap-teaser-ring{position:absolute;border-radius:50%;border:1px solid rgba(93,202,165,.2);pointer-events:none}
+.rtr1{width:300px;height:300px;right:-80px;bottom:-80px;animation:ringBreath 6s ease-in-out infinite}
+.rtr2{width:500px;height:500px;right:-180px;bottom:-180px;animation:ringBreath 6s ease-in-out infinite 1.2s}
+.roadmap-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;color:#5DCAA5;text-transform:uppercase;letter-spacing:.12em;margin-bottom:1rem;background:rgba(93,202,165,.1);padding:4px 10px 4px 8px;border-radius:100px;border:1px solid rgba(93,202,165,.2)}
+.roadmap-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:#5DCAA5}
+.roadmap-teaser h3{font-size:26px;font-weight:700;color:white;letter-spacing:-.5px;line-height:1.2;margin-bottom:.75rem;max-width:440px}
+.roadmap-teaser h3 span{color:#5DCAA5}
+.roadmap-teaser-sub{font-size:14px;color:rgba(255,255,255,.5);line-height:1.65;max-width:420px;margin-bottom:1.75rem}
+.roadmap-pillars{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:1.75rem}
+.roadmap-pillar{font-size:11px;padding:4px 12px;border-radius:100px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.1)}
+.roadmap-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:12px;background:#1D9E75;color:white;border:none;font-size:15px;font-weight:700;cursor:pointer;transition:all .15s;font-family:'Space Grotesk',var(--font-sans)}
+.roadmap-cta:hover{background:#0F6E56;transform:translateY(-2px)}
+.roadmap-cta:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.roadmap-cta svg{width:15px;height:15px;stroke:white;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.roadmap-loading{padding:3rem 2rem;text-align:center;background:var(--color-background-secondary);border-radius:16px;border:1px solid var(--color-border-tertiary);margin:2rem 0}
+.roadmap-loading-title{font-size:16px;font-weight:700;color:var(--color-text-primary);margin-bottom:.5rem}
+.roadmap-loading-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem}
+.roadmap-progress-bar{width:100%;max-width:320px;height:3px;background:var(--color-border-tertiary);border-radius:100px;overflow:hidden;margin:0 auto}
+.roadmap-progress-fill{height:100%;background:linear-gradient(90deg,#1D9E75,#5DCAA5);border-radius:100px;transition:width 1.5s ease;width:0%}
+.roadmap-section{margin:2rem 0;animation:fadeUp .4s ease}
+.roadmap-section-header{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem}
+.roadmap-badge{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:700;color:#5DCAA5;text-transform:uppercase;letter-spacing:.12em;padding:5px 12px 5px 8px;border-radius:100px;background:rgba(93,202,165,.08);border:1px solid rgba(93,202,165,.18)}
+.rm-body{font-family:'Space Grotesk',var(--font-sans)}
+.rm-body h2{font-size:22px;font-weight:700;color:var(--color-text-primary);margin:2rem 0 .875rem;letter-spacing:-.4px;padding-bottom:.5rem;border-bottom:2px solid #1D9E75}
+.rm-body h3{font-size:17px;font-weight:700;color:var(--color-text-primary);margin:1.5rem 0 .625rem;letter-spacing:-.3px}
+.rm-body h4{font-size:14px;font-weight:700;color:#1D9E75;margin:1.25rem 0 .5rem;text-transform:uppercase;letter-spacing:.06em;font-size:11px}
+.rm-body p{font-size:14px;color:var(--color-text-secondary);line-height:1.78;margin-bottom:.875rem}
+.rm-body ul,.rm-body ol{padding-left:1.25rem;margin-bottom:1rem}
+.rm-body li{font-size:14px;color:var(--color-text-secondary);line-height:1.68;margin-bottom:.4rem}
+.rm-body strong{color:var(--color-text-primary);font-weight:700}
+.rm-body em{color:#1D9E75;font-style:normal;font-weight:600}
+.rm-body blockquote{border-left:3px solid #1D9E75;padding:.75rem 1rem;background:var(--color-background-secondary);border-radius:0 10px 10px 0;margin:1rem 0;font-size:14px;color:var(--color-text-secondary);line-height:1.65}
+.rm-body code{font-family:monospace;font-size:12px;background:var(--color-background-secondary);padding:2px 7px;border-radius:5px;color:#1D9E75;border:1px solid var(--color-border-tertiary)}
+.rm-body pre{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:12px;padding:1rem 1.25rem;margin:1rem 0;overflow-x:auto}
+.rm-body pre code{background:none;border:none;padding:0;font-size:13px;color:var(--color-text-primary)}
+.rm-body table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:13px}
+.rm-body th{background:#1D9E75;color:white;padding:10px 14px;text-align:left;font-size:12px;font-weight:700;letter-spacing:.04em}
+.rm-body td{padding:9px 14px;border-bottom:1px solid var(--color-border-tertiary);color:var(--color-text-secondary);line-height:1.55}
+.rm-body tr:last-child td{border-bottom:none}
+.rm-body tr:nth-child(even) td{background:var(--color-background-secondary)}
+.rm-week{border:1.5px solid var(--color-border-tertiary);border-radius:16px;padding:1.25rem 1.5rem;margin-bottom:1rem;transition:border-color .18s}
+.rm-week:hover{border-color:#9FE1CB}
+.rm-week-head{display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:12px}
+.rm-week-title{font-size:15px;font-weight:700;color:var(--color-text-primary)}
+.rm-week-badge{font-size:10px;padding:2px 9px;border-radius:20px;background:#E1F5EE;color:#0F6E56;border:1px solid #9FE1CB;font-weight:700;flex-shrink:0}
+.rm-week-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.rm-week-body.open{max-height:9999px}
+.rm-stream-cursor{display:inline-block;width:2px;height:1em;background:#1D9E75;animation:spin .8s linear infinite;vertical-align:text-bottom;margin-left:2px;border-radius:1px}
+.rm-error{padding:1.5rem;background:#FAEEDA;border:1px solid #FAC775;border-radius:12px;color:#633806;font-size:14px;line-height:1.65}
 </style>
 <div class="rp"><div id="progbar"></div><div id="app"></div>
 <div class="footer-attr">
@@ -550,6 +603,7 @@ function workRiskHTML(){
 
 // ── DATA COLLECTION ──────────────────────────────────────
 let wmpNum=null,wmpFdotClicks=0;
+let roadmapState={status:null,content:'',error:null};
 
 async function saveStats(){
   try{
@@ -766,11 +820,378 @@ function resultsHTML(){
   </div>
 
   <div class="divider"></div>
+  ${roadmapHTML(type)}
+  <div class="divider"></div>
   <div class="restart-row"><button class="btn" onclick="restart()">Start over</button></div>
 </div>`;}
 
+function roadmapHTML(type){
+  if(roadmapState.status===null){
+    const pillars=['Job Search','CV & Resume','Networking','Interviews','Tracking','Mindset'];
+    return`<div class="roadmap-teaser">
+      <div class="roadmap-teaser-inner">
+        <div class="roadmap-teaser-ring rtr1"></div>
+        <div class="roadmap-teaser-ring rtr2"></div>
+        <div class="roadmap-eyebrow"><div class="roadmap-eyebrow-dot"></div>AI Career Coach · Free</div>
+        <h3>Your personalized <span>90-Day Strategy</span> to land a job offer</h3>
+        <p class="roadmap-teaser-sub">Based on your profile as <strong style="color:rgba(255,255,255,.8)">${type.name}</strong>, Claude will build you a brutally honest, execution-ready plan — with daily 3-hour blocks, KPIs, templates, and correction triggers.</p>
+        <div class="roadmap-pillars">${pillars.map(p=>`<span class="roadmap-pillar">${p}</span>`).join('')}</div>
+        <button class="roadmap-cta" id="roadmap-btn">
+          <svg viewBox="0 0 24 24"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+          Build my 90-day strategy
+        </button>
+      </div>
+    </div>`;
+  }
+  if(roadmapState.status==='loading'){
+    return`<div class="roadmap-loading">
+      <div class="spin-wrap" style="margin:0 auto 1.5rem"><div class="spin-ring"></div><div class="spin-inner"></div></div>
+      <div class="roadmap-loading-title">Building your strategy...</div>
+      <div class="roadmap-loading-sub">Personalizing your 90-day plan based on your profile</div>
+    </div>`;
+  }
+  if(roadmapState.status==='error'){
+    return`<div class="rm-error"><strong>Something went wrong.</strong> ${roadmapState.error||'Please try again.'}<br><br><button class="btn" onclick="roadmapState={status:null,content:'',error:null};render()">Try again</button></div>`;
+  }
+  // done — content is already HTML
+  return`<div class="roadmap-section">
+    <div class="roadmap-badge"><div class="roadmap-eyebrow-dot"></div>Your 90-Day Strategy</div>
+    <div class="rm-body" id="rm-content">${roadmapState.content}</div>
+  </div>`;
+}
+
+function mdToHTML(md){
+  if(!md)return'';
+  let h=md
+    // Escape HTML first
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    // Headers
+    .replace(/^#### (.+)$/gm,'<h4>$1</h4>')
+    .replace(/^### (.+)$/gm,'<h3>$1</h3>')
+    .replace(/^## (.+)$/gm,'<h2>$1</h2>')
+    .replace(/^# (.+)$/gm,'<h2>$1</h2>')
+    // Horizontal rules
+    .replace(/^---+$/gm,'<hr style="border:none;border-top:1px solid var(--color-border-tertiary);margin:1.5rem 0">')
+    // Bold + italic
+    .replace(/\*\*\*(.+?)\*\*\*/g,'<strong><em>$1</em></strong>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    // Inline code
+    .replace(/`([^`]+)`/g,'<code>$1</code>')
+    // Blockquotes
+    .replace(/^&gt; (.+)$/gm,'<blockquote>$1</blockquote>')
+    // Tables
+    .replace(/\|(.+)\|\n\|[-| :]+\|\n((?:\|.+\|\n?)+)/g,(m,hdr,rows)=>{
+      const ths=hdr.split('|').map(c=>c.trim()).filter(Boolean).map(c=>`<th>${c}</th>`).join('');
+      const trs=rows.trim().split('\n').map(r=>{
+        const tds=r.split('|').map(c=>c.trim()).filter(Boolean).map(c=>`<td>${c}</td>`).join('');
+        return`<tr>${tds}</tr>`;
+      }).join('');
+      return`<table><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>`;
+    })
+    // Lists (unordered)
+    .replace(/^[-*+] (.+)$/gm,'<li>$1</li>')
+    .replace(/(<li>.*<\/li>\n?)+/g,m=>`<ul>${m}</ul>`)
+    // Lists (ordered)
+    .replace(/^\d+\. (.+)$/gm,'<li>$1</li>')
+    // Paragraphs — lines separated by blank lines
+    .replace(/\n\n(?!<)/g,'</p><p>')
+    // Clean up
+    .replace(/\n/g,'<br>');
+  // Wrap in paragraph if needed
+  if(!h.startsWith('<'))h=`<p>${h}</p>`;
+  return h;
+}
+
+function generateRoadmap(){
+  roadmapState={status:'loading',content:'',error:null};
+  render();
+  // Short UX delay so the loader animation plays, then build synchronously
+  setTimeout(()=>{
+    const html=buildRoadmapHTML();
+    roadmapState={status:'done',content:html,error:null};
+    render();
+    requestAnimationFrame(()=>{
+      const el=document.getElementById('rm-content');
+      if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  },900);
+}
+
+function buildRoadmapHTML(){
+  const type=getProfileType();
+  const e=state.edu, f=state.field, r=state.risk, ws=state.workstyle;
+  const goals=[...state.goals], cats=[...state.cats], vals=[...state.values];
+
+  // ── helpers ──────────────────────────────────────────────
+  const hasGoal=(...g)=>g.some(x=>goals.includes(x));
+  const hasCat=(...c)=>c.some(x=>cats.includes(x));
+  const hasVal=(...v)=>v.some(x=>vals.includes(x));
+  const fl={life_sci:'Life Sciences',medicine:'Clinical Research',chemistry:'Chemistry',physics:'Physics & Engineering',cs_data:'Computer Science & Data',env_sci:'Environmental Sciences',social:'Social Sciences',math:'Mathematics',other:'Interdisciplinary'};
+  const fieldName=fl[f]||'your field';
+  const eduName={ms:"Master's student",mg:"Master's graduate",ps:"PhD student",pg:"PhD graduate",pd:"Postdoc"}[e]||'researcher';
+
+  // ── Target role phrases (goals-based) ───────────────────
+  const targetRoles=hasGoal('consulting')?'management consultant / scientific advisor':hasGoal('rd')?'industry R&D scientist / research engineer':hasGoal('startup')?'startup founder / early-stage scientist':hasGoal('policy')?'science policy analyst / advisor':hasGoal('postdoc')?'strategic postdoctoral researcher':hasGoal('academia')?'PI / academic researcher':hasGoal('industry')?'industry scientist / product specialist':'researcher transitioning to industry';
+  const targetSectors=hasGoal('consulting')?'life sciences consulting, strategy & advisory firms':hasGoal('rd')?'biotech, pharma, medtech, and materials companies':hasGoal('startup')?'early-stage startups, deep-tech ventures, and incubators':hasGoal('policy')?'government bodies, think tanks, and NGOs':hasGoal('academia')?'universities, institutes, and research hospitals':'industry, biotech, consulting, and applied research organizations';
+
+  // ── 1. EXECUTIVE SUMMARY ────────────────────────────────
+  const execSummary={
+    deep_scientist:`You have genuine depth — the kind that takes years to build and cannot be faked. The problem is depth alone does not get you hired in 90 days. What will get you hired is learning to market that depth like a product: headline first, evidence second, business impact always. You have been trained to go deep before you claim anything. Industry moves in the opposite direction. Stop perfecting and start shipping your story.`,
+    data_thinker:`Your quantitative profile is one of the most commercially transferable combinations that comes out of research. The market wants exactly what you have — but it cannot see it yet because you are still describing yourself in academic language. The switch from "I developed statistical models for gene expression analysis" to "I built predictive tools that cut experimental time by 30%" is not dishonest. It is translation. Start translating immediately.`,
+    storyteller:`You know how to make ideas land. That is rare in science and worth real money in the right context. The risk for people with your profile is spending too much time crafting the perfect message and not enough time sending it to enough people. Momentum beats perfection here. You need volume — 25 outreaches a week minimum — and your writing ability is the unfair advantage that will make those messages actually get replies.`,
+    strategic_mind:`You see the system clearly. You understand how research translates to value, how organizations make decisions, how to read a competitive landscape. The gap is that nobody outside your network knows this yet. Your job in the next 90 days is not to think harder — it is to make your strategic thinking visible: through writing, through conversations, through applications that demonstrate you understand the business context, not just the science.`,
+    bridge_builder:`You build relationships that other people cannot. That is a genuine superpower in tech transfer, business development, and scientific partnerships. The challenge: these roles are rarely posted publicly, and they almost always get filled through the very networks you are good at building. Stop applying cold. Start activating every warm connection you have and building new ones deliberately. Your entire strategy must be relationship-first.`,
+    knowledge_architect:`You synthesize and structure knowledge better than almost anyone in a research environment. The organizations that need this — regulatory bodies, strategy firms, scientific publishers, policy shops — are not always where researchers look. Your job in month one is discovery: map the full landscape of places where your synthesis ability has commercial or institutional value, then target them with the precision you would apply to a literature review.`,
+    entrepreneur:`You are wired for building. The question is not whether you should start something — it is whether right now is the moment to do it versus joining something early that gives you the learning and network to build more effectively later. Either path requires the same first 30 days: intense market validation, honest financial planning, and more conversations with people doing what you want to do than feels comfortable.`,
+    research_orchestrator:`You run things. Your instinct is to coordinate, systematize, and make programs function better than they would without you. The titles you should be targeting — research program manager, R&D director, lab director — are almost never filled through job boards. They are filled through reputation. Your 90-day strategy must be reputation-first: every conversation, every piece of writing, every introduction is a deposit in the credibility account that eventually produces an offer.`
+  }[type.id]||`You are at a genuine inflection point. The skills you have built in research are real and rare — but they are invisible to most hiring managers until you translate them into their language. The next 90 days are not about working harder. They are about working differently: targeting with precision, communicating with impact, and building relationships before you need them.`;
+
+  const mindsetShifts={
+    deep_scientist:['<strong>Speed beats perfection.</strong> You will never feel ready. Send the imperfect version. Fix it based on feedback.','<strong>You are a product, not a paper.</strong> Learn to pitch your value in 30 seconds before you explain your methodology.','<strong>Rejection is data, not verdict.</strong> Track it, analyze it, and use it to improve your targeting.'],
+    data_thinker:['<strong>Translate everything.</strong> No academic jargon in any application, profile, or conversation. Business outcomes only.','<strong>Your skills are rare outside academia.</strong> Stop underselling. Start stating your value with the confidence your track record earns.','<strong>Volume is a strategy.</strong> 15 tailored applications a week is not spam — it is the minimum viable search.'],
+    storyteller:['<strong>Distribution matters as much as quality.</strong> A good story nobody reads is worth nothing. Send it. Post it. Say it out loud.','<strong>Metrics anchor credibility.</strong> Every story needs a number. "Improved" means nothing. "Reduced by 40%" opens doors.','<strong>Consistency compounds.</strong> Two LinkedIn posts a week for 12 weeks builds more momentum than one perfect post.'],
+    strategic_mind:['<strong>Visibility first, depth second.</strong> Nobody will ask for your analysis if they do not know you exist.','<strong>Choose a lane.</strong> Strategic generalists do not get hired. Strategic specialists in a specific domain do.','<strong>Decisions require action.</strong> You can analyze indefinitely. At some point, you must commit and execute.'],
+    bridge_builder:['<strong>Relationships are the pipeline.</strong> Stop treating networking as supplementary. It is the primary strategy.','<strong>Ask clearly.</strong> Vague relationship-building produces vague outcomes. Ask for specific things in every conversation.','<strong>Follow through is everything.</strong> One thoughtful follow-up is worth ten new contacts.'],
+    knowledge_architect:['<strong>Publish your thinking.</strong> A synthesis that lives in your head has no market value. Put it where people can find it.','<strong>Niche expertise commands premium.</strong> Stop being broadly knowledgeable. Become the person for one specific domain.','<strong>Make it useful, not complete.</strong> A concise, actionable insight beats a comprehensive review every time.'],
+    entrepreneur:['<strong>Validate before you build.</strong> Talk to 10 potential customers before writing a single line of code or filing any IP.','<strong>Revenue is the only real signal.</strong> Everything else is a proxy. Get to a paying customer as fast as possible.','<strong>Your scientific credibility is leverage.</strong> Use it deliberately to open doors that pure business founders cannot.'],
+    research_orchestrator:['<strong>Lead before you have the title.</strong> Start coordinating things now. The title follows the demonstrated capability.','<strong>Systems thinking is the product.</strong> Document everything you build. It becomes your portfolio.','<strong>Internal reputation travels.</strong> Every project you make run smoother is a reference in your next career conversation.']
+  }[type.id]||['<strong>Translation is not simplification.</strong> Learn to speak the language of your target industry without losing precision.','<strong>Network first, apply second.</strong> Referred candidates get screened at 4x the rate of cold applications.','<strong>Execution beats planning.</strong> A slightly imperfect CV sent today beats a perfect one sent in three weeks.'];
+
+  const delusions={
+    ps:['<em>"My publication record will speak for itself."</em> — Hiring managers do not read papers. They read bullet points.','<em>"I need to finish my PhD before I can start exploring."</em> — The best transitions are planned 18 months before submission.','<em>"Industry will just see that I am smart."</em> — Smart is the baseline. Industry hires for specific, demonstrated impact.'],
+    pg:['<em>"My PhD is enough of a differentiator."</em> — Every shortlist has three PhDs. The differentiator is how you explain what yours enabled.','<em>"I will network once I have a job."</em> — You get the job through the network. Not after.','<em>"The right role will find me."</em> — It will not. You have to go find it.'],
+    pd:['<em>"One more paper will make me more competitive."</em> — After a postdoc, another publication rarely changes the hiring outcome. Your network and communication do.','<em>"I am too specialized to switch now."</em> — Specialization is an asset when framed correctly. It only becomes a constraint when you believe it does.','<em>"Consulting/industry is a step down."</em> — This is academia\'s narrative, not the real world\'s. It is simply a different track with different rewards.'],
+    ms:['<em>"I need more credentials before applying."</em> — You do not. You need more targeted outreach.','<em>"Graduate school is the safe option."</em> — Graduate school is a bet. Make it deliberately.','<em>"I am not ready for industry yet."</em> — Industry hires based on demonstrated thinking, not completion certificates.'],
+    mg:['<em>"I need a PhD to be taken seriously in research."</em> — Dozens of high-impact roles do not require one.','<em>"My thesis topic limits my options."</em> — Your research process is transferable. Your thesis topic is one line on a CV.','<em>"I should wait until I have clarity before reaching out."</em> — Conversations create clarity. Waiting destroys it.']
+  }[e]||['<em>"Credentials will do the work for me."</em> — They will get you read. They will not get you hired.','<em>"The perfect role is out there waiting."</em> — Roles are built through relationships as often as they are posted on job boards.','<em>"I will start properly next month."</em> — Stop waiting. The 90 days starts today.'];
+
+  // ── 2. PREP CHECKLIST ────────────────────────────────────
+  const linkedinItems=[
+    `Rewrite headline: <strong>[Target Role] | ${fieldName} | [1 impact statement]</strong> — no job titles, no "PhD candidate"`,
+    `Replace "About" section: open with a problem you solve, not your education history. End with a clear call-to-action`,
+    `Upload a banner that signals your domain — a lab image, a data visualization, or a branded graphic`,
+    `Optimize your Featured section: pin your best paper reframe, a portfolio piece, or a short post with 500+ reactions`,
+    `Set your Open To Work settings to recruiters-only, with your 3 target job titles and location preference`
+  ];
+  const resumeItems=[
+    `Build one master CV (2 pages max for ${e==='ps'||e==='pg'||e==='pd'?'PhD-level':'research'} applicants): education, research, key methods, quantified outcomes`,
+    `Create 2 tailored versions: one for ${hasGoal('consulting')?'consulting/strategy':'industry/R&D'} roles, one for ${hasGoal('policy')||hasGoal('academia')?'academic/institutional':'applied/operational'} roles`,
+    `Convert every academic bullet to impact format: <strong>[Action verb] + [Method/Tool] + [Measurable result]</strong>`,
+    `Add a 3-line Summary at the top that mirrors the language of your target JDs — change this for every application cluster`
+  ];
+
+  // ── 3. PILLARS TABLE ─────────────────────────────────────
+  const pillarsTable=`<table><thead><tr><th>Pillar</th><th>Weeks 1–4</th><th>Weeks 5–8</th><th>Weeks 9–12</th></tr></thead><tbody>
+<tr><td><strong>Job Search Strategy</strong></td><td>Map 50 target roles & companies</td><td>Prioritize warm leads & referrals</td><td>Close pipeline, negotiate offers</td></tr>
+<tr><td><strong>CV & Resume</strong></td><td>Build master + 2 tailored versions</td><td>Iterate based on screen rate data</td><td>Version for final-round employers</td></tr>
+<tr><td><strong>Networking & Outreach</strong></td><td>25 cold/warm outreaches per week</td><td>10 conversations booked per week</td><td>Referrals → pipeline conversion</td></tr>
+<tr><td><strong>Interview Prep</strong></td><td>2 mock interviews per week</td><td>Deep STAR stories + case practice</td><td>Employer-specific prep per interview</td></tr>
+<tr><td><strong>Follow-Up & Tracking</strong></td><td>Set up tracker, log every contact</td><td>Weekly pipeline review + corrections</td><td>Daily follow-up on active processes</td></tr>
+<tr><td><strong>Mindset & Accountability</strong></td><td>Daily discipline + rejection log</td><td>Weekly audit + course corrections</td><td>Offer evaluation + decision framework</td></tr>
+</tbody></table>`;
+
+  // ── 4. MONTH 1 WEEKS ─────────────────────────────────────
+  const mp1=hasGoal('consulting')?`Extract 10 impact verbs and 5 business outcomes from this consulting JD: [paste JD]. Return two lists. Then rewrite my top 3 PhD achievements as consulting case bullets: Situation / Action / Measurable result.`
+    :hasGoal('startup')?`I am a researcher transitioning into [role] at an early-stage startup. Rewrite this academic bullet as a founder-ready impact statement in under 14 words. Include one number and one business result.`
+    :`From this JD, extract 12 ATS keywords (skills + nouns) and 5 business outcomes. Return two bullet lists. Then flag which of my current resume bullets best match these keywords.`;
+
+  const mp2=`Write 3 versions of a LinkedIn connection request (under 65 words each) from a ${eduName} in ${fieldName} targeting [Name] at [Company]. Each version should reference [specific hook from their profile/recent post] and end with a clear ask for a 15-minute conversation. Version A: curiosity-led. Version B: problem-led. Version C: mutual-connection-led.`;
+
+  const mp3=`Transform this academic bullet into 3 industry versions: "[paste your bullet]". Requirements: each under 14 words, starts with a strong past-tense verb, includes one metric, and ends with a business result. Variants: A) for ${hasGoal('consulting')?'consulting':'R&D'}, B) for ${hasGoal('startup')?'startup':'industry'}, C) for ${hasGoal('policy')?'policy':'general industry'}.`;
+
+  function week(num,obj,kpi,days,triggers,outcome){
+    return`<div class="rm-week">
+<div class="rm-week-head" onclick="this.nextElementSibling.classList.toggle('open')">
+  <div class="rm-week-title">Week ${num} — ${obj}</div>
+  <div style="display:flex;align-items:center;gap:10px"><div class="rm-week-badge">KPI: ${kpi}</div><div class="chv">&#8964;</div></div>
+</div>
+<div class="rm-week-body">
+<div style="padding:1.25rem 0 .5rem">${days}
+<div style="margin-top:1.25rem;padding:14px 16px;background:var(--color-background-secondary);border-radius:12px;border-left:3px solid #BA7517">
+<div style="font-size:11px;font-weight:700;color:#BA7517;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem">Correction Triggers</div>
+<div style="font-size:13px;color:var(--color-text-secondary);line-height:1.65">${triggers}</div></div>
+<div style="margin-top:.875rem;padding:12px 16px;background:#E1F5EE;border-radius:10px">
+<div style="font-size:11px;font-weight:700;color:#085041;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem">Expected Outcome</div>
+<div style="font-size:13px;color:#0F6E56;line-height:1.65">${outcome}</div></div>
+</div></div></div>`;
+  }
+
+  function dop(h1,h2,h3){
+    return`<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:1rem 0">
+${[['🔗 Hour 1','Outreach & Relationships',h1],['📄 Hour 2','Applications & Resume',h2],['🧠 Hour 3','Drills & Reflection',h3]].map(([icon,lbl,body])=>`
+<div style="padding:14px;border:1.5px solid var(--color-border-tertiary);border-radius:12px">
+<div style="font-size:10px;font-weight:700;color:#1D9E75;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">${lbl}</div>
+<div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6">${body}</div>
+</div>`).join('')}
+</div>
+<style>@media(max-width:560px){.dop-grid{grid-template-columns:1fr!important}}</style>`;
+  }
+
+  const w1days=dop(
+    `<strong>00:00–00:10</strong> Open target list. Identify 10 people to contact this week.<br><strong>00:10–00:30</strong> Research 3 contacts: recent posts, company news, shared connections.<br><strong>00:30–00:55</strong> Draft + send 5 personalized connection requests.<br><strong>00:55–01:00</strong> Log in tracker.`,
+    `<strong>01:00–01:15</strong> Pull 3 target JDs from LinkedIn / company sites.<br><strong>01:15–01:35</strong> Run <em>Micro-Prompt A</em> (below) on JD #1.<br><strong>01:35–01:55</strong> Rewrite top 3 bullets of your master resume to mirror JD #1 outcomes.<br><strong>01:55–02:00</strong> Queue JD #2 for tomorrow.`,
+    `<strong>02:00–02:10</strong> Record yourself answering: "Tell me about yourself in 90 seconds."<br><strong>02:10–02:35</strong> Rewrite answer using STAR. Record again.<br><strong>02:35–02:55</strong> LinkedIn post draft (publish Tue/Fri): 1 insight from your research in plain language.<br><strong>02:55–03:00</strong> Log counts. Set tomorrow's 3 priorities.`
+  );
+  const w1=week(1,'Setup, targeting & LinkedIn overhaul','10 outreaches, 5 apps, LinkedIn updated',w1days,
+    `Cold reply rate &lt; 10% after 15 messages → rewrite your opener. Remove any academic jargon. Lead with the problem you solve, not your background.<br>App→Screen &lt; 5% after 10 applications → rebuild your resume summary to mirror JD language exactly.`,
+    `LinkedIn fully optimized. Master resume v1 complete. 10 people contacted. First 5 applications submitted. Tracker running.`
+  );
+
+  const microPrompts=`<div style="margin:1rem 0;padding:16px 18px;background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:12px">
+<div style="font-size:11px;font-weight:700;color:#7F77DD;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.875rem">⚡ Copy-Paste Micro-Prompts for Week 2</div>
+<div style="margin-bottom:.875rem"><div style="font-size:12px;font-weight:700;color:var(--color-text-primary);margin-bottom:.3rem">Prompt A — JD keyword extraction:</div><div style="font-size:12px;color:var(--color-text-secondary);font-style:italic;line-height:1.6;padding:8px 12px;background:var(--color-background-primary);border-radius:8px;border:1px solid var(--color-border-tertiary)">"${mp1}"</div></div>
+<div style="margin-bottom:.875rem"><div style="font-size:12px;font-weight:700;color:var(--color-text-primary);margin-bottom:.3rem">Prompt B — Outreach message:</div><div style="font-size:12px;color:var(--color-text-secondary);font-style:italic;line-height:1.6;padding:8px 12px;background:var(--color-background-primary);border-radius:8px;border:1px solid var(--color-border-tertiary)">"${mp2}"</div></div>
+<div><div style="font-size:12px;font-weight:700;color:var(--color-text-primary);margin-bottom:.3rem">Prompt C — Resume bullet rewrite:</div><div style="font-size:12px;color:var(--color-text-secondary);font-style:italic;line-height:1.6;padding:8px 12px;background:var(--color-background-primary);border-radius:8px;border:1px solid var(--color-border-tertiary)">"${mp3}"</div></div>
+</div>`;
+
+  const w2days=dop(
+    `<strong>00:00–00:05</strong> Open tracker. Load 10 contacts for today.<br><strong>00:05–00:20</strong> Research 3 contacts. Note 1 specific hook per person.<br><strong>00:20–00:45</strong> Draft + send 5 outreach messages (3 personalized, 2 template-based).<br><strong>00:45–01:00</strong> Inbox sweep: reply to any responses, book call times.`,
+    `<strong>01:00–01:05</strong> Pull 3 JDs. Paste links in tracker.<br><strong>01:05–01:20</strong> Run Micro-Prompt A on JD #2.<br><strong>01:20–01:40</strong> Tailor resume top third to mirror JD #2 keywords.<br><strong>01:40–01:55</strong> Submit tailored application for JD #1. Log req ID.<br><strong>01:55–02:00</strong> Queue JD #3.`,
+    `<strong>02:00–02:05</strong> Pick 2 behavioral questions for today.<br><strong>02:05–02:30</strong> Record 2 STAR answers (90 sec each). Note filler words.<br><strong>02:30–02:45</strong> Write a 120-word "Problem–Method–Impact" paragraph for your top research achievement.<br><strong>02:45–02:55</strong> KPI check. Correct if needed.<br><strong>02:55–03:00</strong> Close. Log counts.`
+  );
+  const w2=week(2,'Resume rebuild & outreach momentum','15+ outreaches, 10 apps, 2 mocks',w2days+microPrompts,
+    `Cold reply rate &lt; 10% → test Problem-led opener instead of Compliment-led. Switch subject lines.<br>App→Screen still &lt; 8% → redo top third of resume. Mirror the exact nouns from the JD in your first 3 bullet points.`,
+    `Resume v2 aligned to 3 target JD types. 15+ outreach messages sent. 10 applications submitted. 2 interview answers recorded. Tracker updated with conversion metrics.`
+  );
+
+  const w3days=dop(
+    `<strong>00:00–00:15</strong> Identify 5 companies in your region in target sector. Log in "Regional Scan" tracker tab.<br><strong>00:15–00:40</strong> Find 2 employees per company (R&D, Product, or Science roles). Queue for outreach.<br><strong>00:40–00:55</strong> Draft 3 referral requests to warm connections (Prompt B variant).<br><strong>00:55–01:00</strong> Send. Log.`,
+    `<strong>01:00–01:20</strong> Application Sprint: pull 5 JDs, score them 1–5 for fit.<br><strong>01:20–01:45</strong> Submit 2 fully tailored applications (Prompt A + Prompt C).<br><strong>01:45–01:55</strong> Update tracker with submission data.<br><strong>01:55–02:00</strong> Schedule 2 more applications for tomorrow.`,
+    `<strong>02:00–02:25</strong> Mock interview drill: record full 15-min mock with 3 questions.<br><strong>02:25–02:45</strong> Debrief: count filler words, missing metrics, weak transitions.<br><strong>02:45–02:55</strong> LinkedIn post: reframe a research result as a business insight. Schedule for Friday.<br><strong>02:55–03:00</strong> Weekly mini-audit. Are you hitting KPIs?`
+  );
+  const w3=week(3,'Regional mapping & referral activation','5 referral requests, 15 apps, 2 mocks booked',w3days,
+    `&lt; 2 coffee chats booked → expand search radius to 50km or target remote-first companies. Use Crunchbase filters.<br>Referral request reply rate &lt; 20% → warm up contacts first with a genuine comment or share before asking.`,
+    `10+ companies in regional tracker. 5 employees queued for outreach. 2 coffee chats booked. 15 applications submitted. Referral pipeline activated.`
+  );
+
+  const w4days=dop(
+    `<strong>00:00–00:20</strong> Follow up on all Week 2–3 outreach with no reply (5-day rule).<br><strong>00:20–00:45</strong> Coffee chat prep: research agenda, 3 questions per person, 1 specific ask.<br><strong>00:45–01:00</strong> Conduct or schedule 2 coffee chats.`,
+    `<strong>01:00–01:20</strong> Application Sprint: 5 JDs → 2 submissions.<br><strong>01:20–01:40</strong> Review your App→Screen rate. Identify the 3 applications with best-matching JDs. What pattern do they share?<br><strong>01:40–01:55</strong> Rebuild your weakest resume section based on that pattern.<br><strong>01:55–02:00</strong> Queue next week.`,
+    `<strong>02:00–02:20</strong> Full mock interview (20 min, record).<br><strong>02:20–02:40</strong> Monthly audit: apps sent, screens booked, reply rates, conversations had.<br><strong>02:40–02:55</strong> Write Month 2 targeting adjustments based on what you learned.<br><strong>02:55–03:00</strong> Set Week 5 priorities.`
+  );
+  const w4=week(4,'Pipeline review & momentum checkpoint','Monthly audit, 15 apps, 2 screens targeted',w4days,
+    `0 screens after 30 applications → stop applying cold for 1 week. Go 100% referral-based. Every application should come through a conversation.<br>App→Screen still &lt; 8% → reassess your role targeting. Are you applying to roles where your profile is genuinely a fit?`,
+    `Month 1 audit complete. App→Screen baseline established. Resume at v3+. 2+ screens or conversations booked. Monthly plan for Month 2 written.`
+  );
+
+  // ── 5 & 6. MONTH 2–3 OVERVIEW ───────────────────────────
+  const months23=`<table><thead><tr><th>Week</th><th>Primary Focus</th><th>KPI Targets</th><th>Key Milestone</th></tr></thead><tbody>
+<tr><td><strong>W5</strong></td><td>Interview system activation</td><td>20 outreaches · 3 screens · 2 mocks</td><td>First screen interview</td></tr>
+<tr><td><strong>W6</strong></td><td>Deep STAR story library (10 stories)</td><td>15 apps · 4 screens · 3 mocks</td><td>STAR story bank complete</td></tr>
+<tr><td><strong>W7</strong></td><td>Referral pipeline acceleration</td><td>30 outreaches · 5 screens · 2 final-round prep</td><td>First final-round interview</td></tr>
+<tr><td><strong>W8</strong></td><td>Offer preparation + negotiation research</td><td>15 apps · 4 screens · 1 offer in pipeline</td><td>Compensation research complete</td></tr>
+<tr><td><strong>W9</strong></td><td>Closing pipeline — maximum activity</td><td>25 outreaches · 6 screens · 2 finals</td><td>2+ active offer conversations</td></tr>
+<tr><td><strong>W10</strong></td><td>Parallel tracking: never stop until signed</td><td>15 apps · 5 screens · 1 written offer</td><td>First written offer received</td></tr>
+<tr><td><strong>W11</strong></td><td>Negotiation + backup pipeline</td><td>Maintain 10 apps/week as insurance</td><td>Counter-offer or acceptance decision</td></tr>
+<tr><td><strong>W12</strong></td><td>Sign, close, and transition plan</td><td>Signed offer + notice plan</td><td>Offer signed ✓</td></tr>
+</tbody></table>`;
+
+  // ── 7. TEMPLATES ─────────────────────────────────────────
+  const role1=hasGoal('consulting')?'Management Consultant':hasGoal('rd')?'Research Scientist':hasGoal('startup')?'Early-Stage Scientist':hasGoal('policy')?'Science Policy Analyst':hasGoal('postdoc')?'Postdoctoral Researcher':'Research Professional';
+  const coldMsg=`Hi [Name],\n\nI came across your work on [specific project / post / paper] and it directly connects to what I have been focused on — [1 sentence on your research area].\n\nI am a ${eduName} in ${fieldName} exploring ${targetRoles} roles. I would value a 15-minute conversation about your path into [their role] and what you wish you had known.\n\nWould any time next week work?\n\nBest,\n[Your name]`;
+  const followupMsg=`Hi [Name],\n\nFollowing up on my message from last week — I realize your inbox is busy.\n\nIn case it helps: I recently [1 specific achievement in plain language]. I am actively exploring ${targetRoles} opportunities and your experience at [Company] seemed like exactly the right perspective.\n\nHappy to make this easier — a quick 10-minute call or a question answered over message works for me.\n\nThank you,\n[Your name]`;
+  const referralMsg=`Hi [Name],\n\nHope things are going well. I am actively targeting ${targetRoles} roles in ${targetSectors} and would love your help.\n\nDo you know anyone at [Company] or in [sector] who might be open to a brief conversation? I am not asking you to vouch for me — just an introduction if it feels natural.\n\nHappy to do the same for anyone in your network.\n\nThanks so much,\n[Your name]`;
+  const thankYouMsg=`Hi [Interviewer name],\n\nThank you for the conversation today — I genuinely enjoyed [specific moment: the discussion about X / your perspective on Y].\n\nIt reinforced my interest in [specific aspect of the role / company challenge]. Based on what you described, I believe my background in [specific skill] directly addresses [their challenge].\n\nLooking forward to the next steps.\n\nBest,\n[Your name]`;
+
+  function tBox(label,msg){
+    return`<div style="margin-bottom:1.25rem">
+<div style="font-size:12px;font-weight:700;color:var(--color-text-primary);margin-bottom:.5rem">${label}</div>
+<div style="font-size:13px;color:var(--color-text-secondary);line-height:1.7;padding:14px 16px;background:var(--color-background-secondary);border-radius:10px;border:1px solid var(--color-border-tertiary);white-space:pre-wrap;font-family:inherit">${msg}</div>
+</div>`;
+  }
+
+  const kpiTracker=`<table><thead><tr><th>Week</th><th>Apps Sent</th><th>Outreaches</th><th>Replies</th><th>Screens</th><th>Mocks Done</th><th>Notes</th></tr></thead><tbody>
+${[1,2,3,4,5,6,7,8,9,10,11,12].map(w=>`<tr><td><strong>W${w}</strong></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td></td></tr>`).join('')}
+</tbody></table>`;
+
+  // ── 8. KPI DASHBOARD ─────────────────────────────────────
+  const kpiDash=`<table><thead><tr><th>Metric</th><th>Weekly Target</th><th>Correction Trigger</th><th>Prescribed Fix</th></tr></thead><tbody>
+<tr><td>Applications sent</td><td>15+</td><td>&lt; 12 in any week</td><td>Add 5 pre-queued JDs to next day's sprint</td></tr>
+<tr><td>Outreach messages</td><td>25+</td><td>&lt; 20 in any week</td><td>Add 10 new contacts from alumni / ${fieldName} communities</td></tr>
+<tr><td>Cold reply rate</td><td>≥ 15%</td><td>&lt; 10% over 2 weeks</td><td>Rewrite opener. Switch from compliment-led to problem-led message</td></tr>
+<tr><td>App → Screen rate</td><td>≥ 8%</td><td>&lt; 5% over 3 weeks</td><td>Rebuild resume top third. Mirror JD nouns exactly</td></tr>
+<tr><td>Conversations / week</td><td>5+</td><td>&lt; 3 for 2 weeks</td><td>Shift 50% of effort to referral-based applications only</td></tr>
+<tr><td>Mock interviews</td><td>2+</td><td>&lt; 1 in any week</td><td>Book a peer mock. Record yourself solo if needed</td></tr>
+<tr><td>No progress in 3 weeks</td><td>—</td><td>Zero screens + zero replies</td><td>Reassess target roles. Run 5 informational interviews before restarting applications</td></tr>
+</tbody></table>`;
+
+  // ── 9. WEEKLY REVIEW ─────────────────────────────────────
+  const reviewQs={
+    deep_scientist:['Did I translate my science into impact language in every message I sent this week — or did I slip back into academic framing?','What is my App→Screen rate this week? What pattern connects the successful ones?','Did I send at least 25 outreach messages? If not, what stopped me — and is that a real constraint or an excuse?','What is one scientific achievement I have not yet converted into a business impact story? Do it now.','What will I do differently next week, and what is the specific first action I will take on Monday before 10am?'],
+    data_thinker:['Did I quantify every claim in my resume and outreach this week — or did I use vague language?','Which of my applications produced a screen? What keyword/framing pattern explains it?','Did I send 25 outreach messages? If not, identify the specific hour I will add back next week.','What new data skill or tool am I showcasing this week that I was not last week?','What is my pipeline conversion rate this week, and what is one intervention to improve it by 20%?'],
+    storyteller:['Did I publish at least 2 posts this week? Did they generate engagement — and if not, what is the hypothesis for why not?','What is one story I have been telling badly this week? Rewrite it in 3 sentences right now.','Did I send my follow-up messages at exactly 5 days after the original — or did I let them slip?','What is the most compelling thing I said in any conversation this week? How do I systematize it?','What is one person I should have messaged this week but did not? Message them now.'],
+    strategic_mind:['Did I make any decisions this week — or just gather more information?','What is my current hypothesis about which sector / role cluster has the highest ROI for my effort?','Did I position my strategic thinking explicitly in at least 3 outreach messages this week?','What is one piece of industry intelligence I gathered this week that changed my targeting?','What is the single highest-leverage action I can take in the next 48 hours?'],
+    bridge_builder:['How many new connections did I make this week, and how many of those have a clear next step attached?','Did I ask clearly for what I wanted in every conversation — or did I leave the ask vague?','Which relationship from this week has the highest potential and what is my follow-up plan?','Did I introduce at least one person to another person this week? (Giving builds credibility.)','What is one conversation I should have had this week but avoided? Have it before Wednesday.'],
+  }[type.id]||['Did I hit my KPI targets this week? What is the specific cause of any shortfall?','What is one thing I did this week that I will definitely repeat next week?','What is one thing I will stop doing because it produced no results?','Which conversation this week generated the most genuine momentum?','What is my first action on Monday morning — written down right now?'];
+
+  // ── 10. FINAL COACHING NOTE ──────────────────────────────
+  const finalNote={
+    deep_scientist:`Here is the truth about people with your profile: you are going to be tempted to spend Month 1 perfecting your resume, building a beautiful spreadsheet, and reading about career transitions instead of actually making them. That is not preparation — that is avoidance dressed up as work. Your depth is real. Your instinct to earn the right to claim things before you say them is admirable in science and lethal in a job search. In the next 48 hours, you need to do exactly two things: send 5 outreach messages today, and publish one post on LinkedIn tomorrow. Not when the resume is ready. Now.`,
+    data_thinker:`You have one specific problem: you believe that good data will win the argument. It will not. Hiring is a human decision made under time pressure by people who are not reading your methodology. They are reading your first line. If your first line does not immediately signal what problem you solve and what outcome you produce, you are invisible — regardless of how good the rest is. Your next 48 hours: open your LinkedIn profile right now and rewrite your headline. Then open your resume and rewrite the first bullet point of every position. Start there. The rest follows.`,
+    storyteller:`Your trap is this: you are so good at crafting the message that you will spend the entire 90 days crafting and not enough time sending. Quality is not the bottleneck. Volume is. You need 25 outreach messages a week, minimum. Some of them will be imperfect. Send them anyway. In the next 48 hours: draft 10 outreach messages using Template 1 from this guide. Personalize the first 5. Send all 10 today. Track who replies. Iterate tomorrow.`,
+    strategic_mind:`You can see the whole board clearly. That is not the problem. The problem is that seeing clearly can become a substitute for moving. You have been building the perfect strategy in your head instead of running the experiment in real life. Strategies that never get tested are just sophisticated procrastination. In the next 48 hours: choose your top 3 target roles right now, identify 10 companies for each, and send your first 5 outreach messages before you go to bed tonight.`,
+    bridge_builder:`You know how to build relationships. What you are probably not doing is building them intentionally enough, fast enough, with a clear enough ask attached to each one. Relationships without asks are social — not strategic. In the next 48 hours: write out a list of your 10 warmest professional contacts. For each one, write one specific thing you are asking for — an introduction, a referral, a 15-minute call. Send those messages today. Not next week. Today.`,
+    knowledge_architect:`You are going to be tempted to spend the first month building a perfect knowledge map of your target industry before you reach out to anyone. Do not. The map is never complete enough, and waiting for completeness is how researchers lose months. Imperfect action beats perfect analysis every time in a job search. In the next 48 hours: pick the one sector you find most interesting, identify 10 companies in it, and send 3 outreach messages today using Template 1. You will learn more from those 3 messages than from any amount of additional research.`,
+    entrepreneur:`Your risk is moving so fast in your head that you stop talking to real people. Every founder who failed at the idea stage failed because they validated with themselves instead of with the market. In the next 48 hours: identify 5 people who are 3–5 years ahead of you on the path you are considering. Write them a short, specific message asking for 20 minutes. Not to pitch. Not to network. To understand what they know now that they wished they had known when they were where you are.`,
+    research_orchestrator:`You are a natural leader — but here is the thing about leaders in a job search: they wait too long for permission. You are probably waiting to feel more ready, more credentialed, more certain before you put yourself forward for leadership roles. Stop. The leadership track is self-selected, not assigned. In the next 48 hours: update your LinkedIn headline to include the word "lead" or "director" or "manager" next to your field. Then write down 5 organizations where you could immediately add value as a program leader. Message one of them today.`
+  }[type.id]||`Stop reading. Start doing. In the next 48 hours, you need exactly three things: your LinkedIn headline updated, 5 outreach messages sent, and your tracker open and running. Everything else is secondary. The researchers who land roles in 90 days are not the most qualified — they are the ones who started the fastest and adjusted the most ruthlessly. That clock started when you finished this assessment.`;
+
+  // ── SECTION BUILDER ──────────────────────────────────────
+  function sec(eyebrow, title, body){
+    return`<div style="margin-bottom:2.25rem">
+<div style="font-size:10px;font-weight:700;color:#1D9E75;text-transform:uppercase;letter-spacing:.12em;display:flex;align-items:center;gap:8px;margin-bottom:.625rem"><span style="width:16px;height:2px;background:#1D9E75;border-radius:1px;display:inline-block"></span>${eyebrow}</div>
+<h2 style="font-size:20px;font-weight:700;color:var(--color-text-primary);margin-bottom:1rem;letter-spacing:-.35px;padding-bottom:.5rem;border-bottom:2px solid #1D9E75">${title}</h2>
+${body}</div>`;
+  }
+
+  function ul(items){return`<ul style="padding-left:1.25rem;margin:0 0 1rem">${items.map(i=>`<li style="font-size:14px;color:var(--color-text-secondary);line-height:1.72;margin-bottom:.35rem">${i}</li>`).join('')}</ul>`;}
+
+  function check(items){return`<ul style="list-style:none;padding:0;margin:0 0 1rem">${items.map(i=>`<li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--color-text-secondary);line-height:1.65;margin-bottom:.5rem;padding:8px 10px;border-radius:8px;background:var(--color-background-secondary)"><span style="color:#1D9E75;font-weight:700;flex-shrink:0">✓</span>${i}</li>`).join('')}</ul>`;}
+
+  function nonNeg(items){return`<ul style="list-style:none;padding:0;margin:0 0 1rem">${items.map(i=>`<li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--color-text-secondary);line-height:1.65;margin-bottom:.5rem;padding:8px 10px;border-radius:8px;border-left:3px solid #D85A30;background:var(--color-background-secondary)"><span style="color:#D85A30;font-weight:700;flex-shrink:0">⚠</span>${i}</li>`).join('')}</ul>`;}
+
+  const nonNegItems=[
+    `3 hours per day, phone-free, timer-enforced. No exceptions on weekdays.`,
+    `Every session starts with the tracker open. Log before you start; log when you finish.`,
+    `Send something every single day — an application, an outreach message, a follow-up, or a post. Zero output days compound into zero results.`,
+    `You are not allowed to spend more than 20 minutes per session on resume editing unless you are applying that day.`
+  ];
+
+  return [
+    sec('01 — Executive Summary','Where You Are & What It Will Take',
+      `<p style="font-size:15px;color:var(--color-text-secondary);line-height:1.82;margin-bottom:1.25rem">${execSummary}</p>
+       <div style="margin-bottom:1.25rem"><div style="font-size:12px;font-weight:700;color:var(--color-text-primary);margin-bottom:.625rem">3 Critical Mindset Shifts for ${type.name}</div>${ul(mindsetShifts)}</div>
+       <div><div style="font-size:12px;font-weight:700;color:var(--color-text-primary);margin-bottom:.625rem">3 Delusions to Drop Immediately</div>${ul(delusions)}</div>`
+    ),
+    sec('02 — Before Week 1','Preparation Checklist',
+      `<div style="margin-bottom:1rem"><div style="font-size:12px;font-weight:700;color:var(--color-text-primary);margin-bottom:.5rem">LinkedIn Overhaul (do this first)</div>${check(linkedinItems)}</div>
+       <div style="margin-bottom:1rem"><div style="font-size:12px;font-weight:700;color:var(--color-text-primary);margin-bottom:.5rem">Resume / CV Setup</div>${check(resumeItems)}</div>
+       <div style="margin-bottom:1rem"><div style="font-size:12px;font-weight:700;color:var(--color-text-primary);margin-bottom:.5rem">Tracker Setup</div>${check(['Create a Google Sheet with tabs: Applications · Outreach · Conversations · Companies · Weekly KPIs','Add columns: Company | Role | JD Link | Date | Resume Version | Status | Next Step | Notes','Set up a "Weekly Summary" tab with running totals for each KPI metric'])}</div>
+       <div><div style="font-size:12px;font-weight:700;color:var(--color-text-primary);margin-bottom:.5rem">Non-Negotiable Rules</div>${nonNeg(nonNegItems)}</div>`
+    ),
+    sec('03 — Six Pillars','Your 90-Day Operating System',pillarsTable),
+    sec('04 — Month 1','Foundation: Weeks 1–4',`<p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem;line-height:1.65">Click any week to expand the full day-by-day plan with timed blocks. Weekly KPIs shown in the header badge.</p>${w1}${w2}${w3}${w4}`),
+    sec('05–06 — Months 2 & 3','Acceleration & Closing',months23),
+    sec('07 — Templates','Copy-Ready Scripts',
+      tBox('1. Cold LinkedIn Outreach (first contact)',coldMsg)+
+      tBox('2. Follow-Up Message (no reply after 5 days)',followupMsg)+
+      tBox('3. Referral Request',referralMsg)+
+      tBox('4. Interview Thank-You Note',thankYouMsg)+
+      `<div style="margin-bottom:1.25rem"><div style="font-size:12px;font-weight:700;color:var(--color-text-primary);margin-bottom:.5rem">5. Weekly KPI Tracker</div>${kpiTracker}</div>`
+    ),
+    sec('08 — KPI Dashboard','Weekly Targets & Correction Rules',kpiDash),
+    sec('09 — Weekly Review','Sunday Reflection Template (15 minutes)',
+      `<div style="padding:16px 18px;background:var(--color-background-secondary);border-radius:12px;border:1px solid var(--color-border-tertiary)">${reviewQs.map((q,i)=>`<div style="display:flex;gap:12px;margin-bottom:.875rem;align-items:flex-start"><div style="width:24px;height:24px;border-radius:50%;background:#1D9E75;color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">${i+1}</div><div style="font-size:14px;color:var(--color-text-secondary);line-height:1.65">${q}</div></div>`).join('')}</div>`
+    ),
+    sec('10 — Final Coaching Note',`A Direct Word to ${type.name}`,
+      `<div style="padding:20px 24px;border-radius:14px;background:#08192B;border-left:4px solid #1D9E75"><p style="font-size:15px;color:rgba(255,255,255,.78);line-height:1.82;margin:0">${finalNote}</p></div>`
+    )
+  ].join('');
+}
+
 function tog(head){const jb=head.closest('.jc-inner').querySelector('.jb');const chv=head.querySelector('.chv');if(jb)jb.classList.toggle('open');if(chv)chv.classList.toggle('open');}
-function restart(){state={step:-1,edu:null,field:null,satisfaction:null,goals:new Set(),cats:new Set(),values:new Set(),workstyle:null,risk:null,shareOpen:false,filter:'All',dir:1,loading:false};render();}
+function restart(){state={step:-1,edu:null,field:null,satisfaction:null,goals:new Set(),cats:new Set(),values:new Set(),workstyle:null,risk:null,shareOpen:false,filter:'All',dir:1,loading:false};roadmapState={status:null,content:'',error:null};render();}
 
 function render(){
   renderProg();
@@ -803,6 +1224,7 @@ function bind(){
   document.querySelectorAll('[data-f]').forEach(el=>el.addEventListener('click',()=>{state.filter=el.dataset.f;render();}));
   const n=document.getElementById('nxt');if(n)n.addEventListener('click',()=>{if(state.step===6){state.loading=true;state.step=7;}else{state.dir=1;state.step++;}render();});
   const b=document.getElementById('bck');if(b)b.addEventListener('click',()=>{state.dir=-1;state.step--;render();});
+  const rm=document.getElementById('roadmap-btn');if(rm)rm.addEventListener('click',()=>generateRoadmap());
 }
 
 document.addEventListener('keydown',e=>{
