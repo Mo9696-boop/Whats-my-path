@@ -413,7 +413,7 @@ const JOBS=[
 ];
 const SECTORS=[...new Set(JOBS.map(j=>j.s))];
 const KEYS='ABCDEFGHIJ';
-let state={step:-1,edu:null,field:null,satisfaction:null,goals:new Set(),cats:new Set(),values:new Set(),workstyle:null,risk:null,shareOpen:false,filter:'All',dir:1,loading:false};
+let state={step:-1,location:null,edu:null,field:null,satisfaction:null,goals:new Set(),cats:new Set(),values:new Set(),workstyle:null,risk:null,shareOpen:false,filter:'All',dir:1,loading:false};
 const cl=id=>CATS.find(c=>c.id===id)?.t||id;
 const svgA=`<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>`;
 const svgB=`<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>`;
@@ -558,8 +558,8 @@ function scoreJobs(){
 
 function renderProg(){
   if(state.step<0||state.loading){document.getElementById('progbar').innerHTML='';return;}
-  const total=7;
-  const labels=['Background','Your field','Current state','Directions','Strengths','Values','How you work'];
+  const total=8;
+  const labels=['Location','Background','Your field','Current state','Directions','Strengths','Values','How you work'];
   const cur=Math.min(state.step,total-1);
   document.getElementById('progbar').innerHTML=`<div class="prog-wrap">
     <div class="prog-info"><span class="prog-label">${labels[cur]||'Results'}</span>
@@ -590,15 +590,36 @@ function optList(items,key,sel){
 function heroHTML(){return`<div class="hero-wrap"><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
   <div class="eyebrow"><div class="edot"></div>What's my path? · Career assessment for researchers</div>
   <div class="hero-h1">You trained for one career.<br>You qualify for <span class="hl">dozens.</span></div>
-  <p class="hero-sub">Most researchers only ever hear about <strong>3 options</strong>. I mapped <strong>80+</strong>. Answer 7 honest questions and leave with a full written analysis of where you actually fit - including academic paths, postdocs, and PhDs.</p>
+  <p class="hero-sub">Most researchers only ever hear about <strong>3 options</strong>. I mapped <strong>80+</strong>. Answer 8 honest questions and leave with a full written analysis of where you actually fit - including academic paths, postdocs, and PhDs.</p>
   <div class="mq-wrap">${mq(R1,false)}${mq(R2,true)}</div>
   <div class="hero-actions"><button class="hero-cta" id="start-btn">Start my assessment ${svgA}</button><span class="hero-note">Free · About 7 minutes</span></div>
-  <div class="hero-stats"><div><div class="hs-num">80+</div><div class="hs-lbl">career paths mapped</div></div><div><div class="hs-num">7</div><div class="hs-lbl">deep questions</div></div><div><div class="hs-num">8</div><div class="hs-lbl">researcher profiles</div></div></div>
+  <div class="hero-stats"><div><div class="hs-num">80+</div><div class="hs-lbl">career paths mapped</div></div><div><div class="hs-num">8</div><div class="hs-lbl">deep questions</div></div><div><div class="hs-num">8</div><div class="hs-lbl">researcher profiles</div></div></div>
   <div class="creator-strip"><div style="width:1px;height:28px;background:rgba(255,255,255,.15)"></div><div><div class="c-by">Designed &amp; built by</div><div class="c-name">Mohamad AL HAJJ <span class="phd">PhD</span></div></div></div>
 </div>`;}
 
+function locationHTML(){
+  const LOCS=[
+    {id:'france',    l:'France',           flag:'🇫🇷'},
+    {id:'germany',   l:'Germany',          flag:'🇩🇪'},
+    {id:'uk',        l:'United Kingdom',   flag:'🇬🇧'},
+    {id:'usa',       l:'United States',    flag:'🇺🇸'},
+    {id:'other',     l:'Other',            flag:'🌍'},
+  ];
+  return`<div class="step${state.dir<0?' back':''}">
+  <div class="step-ey">Question 1 of 8</div><h2 class="st">Where are you currently located?</h2>
+  <p class="ss">Your location shapes which opportunities, ecosystems, and pathways are most accessible to you.</p>
+  <div class="opts">${LOCS.map(loc=>`
+    <div class="opt${state.location===loc.id?' sel':''}" data-loc="${loc.id}" style="display:flex;align-items:center;gap:12px;color:#e8f4ff">
+      <span style="font-size:22px;line-height:1">${loc.flag}</span>
+      <span style="color:#e8f4ff;font-size:15px;font-weight:500">${loc.l}</span>
+      ${loc.id==='other'?`<input id="loc-other-input" type="text" placeholder="Please specify your country" onclick="event.stopPropagation()" oninput="state.locationOther=this.value" value="${state.locationOther||''}" style="margin-left:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:6px 12px;color:#e8f4ff;font-size:13px;font-family:inherit;flex:1;min-width:0">`:``}
+    </div>`).join('')}
+  </div>
+  <div class="btnrow"><button class="btn btn-p" id="nxt" ${!state.location?'disabled':''}>Continue ${svgA}</button></div>
+</div>`;}
+
 function eduHTML(){return`<div class="step${state.dir<0?' back':''}">
-  <div class="step-ey">Question 1 of 7</div><h2 class="st">Where are you right now?</h2>
+  <div class="step-ey">Question 2 of 8</div><h2 class="st">Where are you right now?</h2>
   <p class="ss">This shapes the entire analysis that follows. Be honest - there is no right answer here.</p>
   ${optList(EDU,'edu',state.edu)}
   <p class="kb-hint">Press A-E to select, Enter to continue</p>
@@ -606,7 +627,7 @@ function eduHTML(){return`<div class="step${state.dir<0?' back':''}">
 </div>`;}
 
 function fieldHTML(){return`<div class="step${state.dir<0?' back':''}">
-  <div class="step-ey">Question 2 of 7</div><h2 class="st">What is your research field?</h2>
+  <div class="step-ey">Question 3 of 8</div><h2 class="st">What is your research field?</h2>
   <p class="ss">This makes your results significantly more specific. A life sciences PhD and a physics PhD have genuinely different career landscapes - and your analysis should reflect that.</p>
   ${optList(FIELDS,'field',state.field)}
   <p class="kb-hint">Press A-I to select, Enter to continue</p>
@@ -614,7 +635,7 @@ function fieldHTML(){return`<div class="step${state.dir<0?' back':''}">
 </div>`;}
 
 function satHTML(){return`<div class="step${state.dir<0?' back':''}">
-  <div class="step-ey">Question 3 of 7</div><h2 class="st">How do you honestly feel about your current path?</h2>
+  <div class="step-ey">Question 4 of 8</div><h2 class="st">How do you honestly feel about your current path?</h2>
   <p class="ss">This is the most revealing question in the whole assessment. Answer what you actually feel - not what you think you should feel.</p>
   ${optList(SATISFACTION,'sat',state.satisfaction)}
   <p class="kb-hint">Press A-E to select, Enter to continue</p>
@@ -624,7 +645,7 @@ function satHTML(){return`<div class="step${state.dir<0?' back':''}">
 function goalHTML(){
   const n=state.goals.size;
   return`<div class="step${state.dir<0?' back':''}">
-  <div class="step-ey">Question 4 of 7</div><h2 class="st">What directions genuinely interest you?</h2>
+  <div class="step-ey">Question 5 of 8</div><h2 class="st">What directions genuinely interest you?</h2>
   <p class="ss">Select all that apply - including academic paths, further studies, or postdocs. The more you select, the richer your results. There are no wrong answers.</p>
   ${optList(GOALS,'goal',state.goals)}
   ${n>0?`<div class="selcount"><span class="selcount-badge">${n}</span>${n} direction${n>1?'s':''} selected</div>`:`<p class="hint-t">Select at least one to continue</p>`}
@@ -635,7 +656,7 @@ function goalHTML(){
 function skillsHTML(){
   const n=state.cats.size;
   return`<div class="step${state.dir<0?' back':''}">
-  <div class="step-ey">Question 5 of 7</div><h2 class="st">What genuinely energizes you?</h2>
+  <div class="step-ey">Question 6 of 8</div><h2 class="st">What genuinely energizes you?</h2>
   <p class="ss">Not what your CV says you are good at - what you would actually choose to spend your time doing, given real freedom to choose.</p>
   <div class="skgrid">${CATS.map(c=>skCard(c)).join('')}</div>
   ${n>0?`<div class="selcount"><span class="selcount-badge">${n}</span>${n} area${n>1?'s':''} selected</div>`:`<p class="hint-t">Select at least one to continue</p>`}
@@ -645,7 +666,7 @@ function skillsHTML(){
 function valuesHTML(){
   const n=state.values.size;
   return`<div class="step${state.dir<0?' back':''}">
-  <div class="step-ey">Question 6 of 7</div><h2 class="st">What matters most to you at work?</h2>
+  <div class="step-ey">Question 7 of 8</div><h2 class="st">What matters most to you at work?</h2>
   <p class="ss">Select everything that genuinely matters - not what sounds admirable, but what you would actually trade for if you had to make a real choice.</p>
   ${optList(VALUES,'val',state.values)}
   ${n>0?`<div class="selcount"><span class="selcount-badge">${n}</span>${n} value${n>1?'s':''} selected</div>`:`<p class="hint-t">Select at least one to continue</p>`}
@@ -655,7 +676,7 @@ function valuesHTML(){
 function workRiskHTML(){
   const ok=state.workstyle&&state.risk;
   return`<div class="step${state.dir<0?' back':''}">
-  <div class="step-ey">Question 7 of 7</div><h2 class="st">Finally - how do you work and relate to risk?</h2>
+  <div class="step-ey">Question 8 of 8</div><h2 class="st">Finally - how do you work and relate to risk?</h2>
   <p class="ss">Two quick things. These shape both your profile type and the honest assessment in your results.</p>
   <div style="margin-bottom:1.75rem"><div class="combo-lbl">How do you work best?</div>${optList(WORKSTYLE,'ws',state.workstyle)}</div>
   <div><div class="combo-lbl">Your relationship with uncertainty and risk?</div>${optList(RISK,'rk',state.risk)}</div>
@@ -749,6 +770,7 @@ function startLoading(){
       const payload=JSON.stringify({
           timestamp:new Date().toISOString(),
           profile:type.name,
+          location:state.location==='other'?(state.locationOther||'other'):state.location||'',
           field:state.field||'not specified',
           edu:state.edu||'',
           satisfaction:state.satisfaction||'',
@@ -1399,28 +1421,30 @@ ${body}</div>`;
 }
 
 function tog(head){const jb=head.closest('.jc-inner').querySelector('.jb');const chv=head.querySelector('.chv');if(jb)jb.classList.toggle('open');if(chv)chv.classList.toggle('open');}
-function restart(){state={step:-1,edu:null,field:null,satisfaction:null,goals:new Set(),cats:new Set(),values:new Set(),workstyle:null,risk:null,shareOpen:false,filter:'All',dir:1,loading:false};roadmapState={status:null,content:'',error:null};render();}
+function restart(){state={step:-1,location:null,edu:null,field:null,satisfaction:null,goals:new Set(),cats:new Set(),values:new Set(),workstyle:null,risk:null,shareOpen:false,filter:'All',dir:1,loading:false};roadmapState={status:null,content:'',error:null};render();}
 
 function render(){
   renderProg();
   const a=document.getElementById('app');
   if(state.step<0)a.innerHTML=heroHTML();
   else if(state.loading){a.innerHTML=loadingHTML();startLoading();}
-  else if(state.step===0)a.innerHTML=eduHTML();
-  else if(state.step===1)a.innerHTML=fieldHTML();
-  else if(state.step===2)a.innerHTML=satHTML();
-  else if(state.step===3)a.innerHTML=goalHTML();
-  else if(state.step===4)a.innerHTML=skillsHTML();
-  else if(state.step===5)a.innerHTML=valuesHTML();
-  else if(state.step===6)a.innerHTML=workRiskHTML();
+  else if(state.step===0)a.innerHTML=locationHTML();
+  else if(state.step===1)a.innerHTML=eduHTML();
+  else if(state.step===2)a.innerHTML=fieldHTML();
+  else if(state.step===3)a.innerHTML=satHTML();
+  else if(state.step===4)a.innerHTML=goalHTML();
+  else if(state.step===5)a.innerHTML=skillsHTML();
+  else if(state.step===6)a.innerHTML=valuesHTML();
+  else if(state.step===7)a.innerHTML=workRiskHTML();
   else{a.innerHTML=resultsHTML();requestAnimationFrame(()=>animateNum('res-count',scoreJobs().length));}
   a.innerHTML=a.innerHTML.replace(/—/g,' - ');
   bind();
-  if(state.step===7)document.querySelectorAll('.jc').forEach((el,i)=>{el.style.animationDelay=`${i*13}ms`;});
+  if(state.step===8)document.querySelectorAll('.jc').forEach((el,i)=>{el.style.animationDelay=`${i*13}ms`;});
 }
 
 function bind(){
   const s=document.getElementById('start-btn');if(s)s.addEventListener('click',()=>{state.dir=1;state.step=0;render();});
+  document.querySelectorAll('[data-loc]').forEach(el=>el.addEventListener('click',()=>{state.location=el.dataset.loc;render();setTimeout(()=>{const inp=document.getElementById('loc-other-input');if(inp){inp.value=state.locationOther||'';inp.focus();}},50);}));
   document.querySelectorAll('[data-edu]').forEach(el=>el.addEventListener('click',()=>{state.edu=el.dataset.edu;render();}));
   document.querySelectorAll('[data-field]').forEach(el=>el.addEventListener('click',()=>{state.field=el.dataset.field;render();}));
   document.querySelectorAll('[data-sat]').forEach(el=>el.addEventListener('click',()=>{state.satisfaction=el.dataset.sat;render();}));
@@ -1430,37 +1454,38 @@ function bind(){
   document.querySelectorAll('[data-ws]').forEach(el=>el.addEventListener('click',()=>{state.workstyle=el.dataset.ws;render();}));
   document.querySelectorAll('[data-rk]').forEach(el=>el.addEventListener('click',()=>{state.risk=el.dataset.rk;render();}));
   document.querySelectorAll('[data-f]').forEach(el=>el.addEventListener('click',()=>{state.filter=el.dataset.f;render();}));
-  const n=document.getElementById('nxt');if(n)n.addEventListener('click',()=>{if(state.step===6){state.loading=true;state.step=7;}else{state.dir=1;state.step++;}render();});
+  const n=document.getElementById('nxt');if(n)n.addEventListener('click',()=>{if(state.step===7){state.loading=true;state.step=8;}else{state.dir=1;state.step++;}render();});
   const b=document.getElementById('bck');if(b)b.addEventListener('click',()=>{state.dir=-1;state.step--;render();});
   const rm=document.getElementById('roadmap-btn');if(rm)rm.addEventListener('click',()=>generateRoadmap());
 }
 
 document.addEventListener('keydown',e=>{
-  if(state.step<0||state.step>6)return;
-  const multiSteps={3:GOALS,4:null,5:VALUES};
-  const singleMaps={0:EDU,1:FIELDS,2:SATISFACTION};
+  if(state.step<0||state.step>7)return;
+  const multiSteps={4:GOALS,5:null,6:VALUES};
+  const singleMaps={0:['france','germany','uk','usa','other'].map(id=>({id})),1:EDU,2:FIELDS,3:SATISFACTION};
   if(singleMaps[state.step]){
     const items=singleMaps[state.step];
     const idx=KEYS.toLowerCase().indexOf(e.key.toLowerCase());
     if(idx>=0&&idx<items.length){
-      if(state.step===0)state.edu=items[idx].id;
-      else if(state.step===1)state.field=items[idx].id;
-      else if(state.step===2)state.satisfaction=items[idx].id;
+      if(state.step===0)state.location=items[idx].id;
+      else if(state.step===1)state.edu=items[idx].id;
+      else if(state.step===2)state.field=items[idx].id;
+      else if(state.step===3)state.satisfaction=items[idx].id;
       render();return;
     }
-    if(e.key==='Enter'&&[state.edu,state.field,state.satisfaction][state.step]){state.dir=1;state.step++;render();}
-  } else if(state.step===3){
+    if(e.key==='Enter'&&[state.location,state.edu,state.field,state.satisfaction][state.step]){state.dir=1;state.step++;render();}
+  } else if(state.step===4){
     const idx=KEYS.toLowerCase().indexOf(e.key.toLowerCase());
     if(idx>=0&&idx<GOALS.length){const id=GOALS[idx].id;state.goals.has(id)?state.goals.delete(id):state.goals.add(id);render();return;}
     if(e.key==='Enter'&&state.goals.size>0){state.dir=1;state.step++;render();}
-  } else if(state.step===4){
-    if(e.key==='Enter'&&state.cats.size>0){state.dir=1;state.step++;render();}
   } else if(state.step===5){
+    if(e.key==='Enter'&&state.cats.size>0){state.dir=1;state.step++;render();}
+  } else if(state.step===6){
     const idx=KEYS.toLowerCase().indexOf(e.key.toLowerCase());
     if(idx>=0&&idx<VALUES.length){const id=VALUES[idx].id;state.values.has(id)?state.values.delete(id):state.values.add(id);render();return;}
     if(e.key==='Enter'&&state.values.size>0){state.dir=1;state.step++;render();}
-  } else if(state.step===6){
-    if(e.key==='Enter'&&state.workstyle&&state.risk){state.loading=true;state.step=7;render();}
+  } else if(state.step===7){
+    if(e.key==='Enter'&&state.workstyle&&state.risk){state.loading=true;state.step=8;render();}
   }
 });
 render();
